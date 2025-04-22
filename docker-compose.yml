@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: mmunin
+      POSTGRES_PASSWORD: Password1!
+      POSTGRES_DB: points
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mmunin -d points"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - points-network
+
+  backend:
+    build: ./backend
+    environment:
+      - NODE_ENV=production
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=mmunin
+      - POSTGRES_PASSWORD=Password1!
+      - POSTGRES_DB=points
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - points-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      - backend
+    networks:
+      - points-network
+
+networks:
+  points-network:
+    driver: bridge
+
+volumes:
+  db_data:
