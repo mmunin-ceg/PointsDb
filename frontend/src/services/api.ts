@@ -43,3 +43,6 @@ export const updateProject = (id: number, data: any) => api.put(`/projects/${id}
 export const deleteProject = (id: number) => api.delete(`/projects/${id}`)
 export const addMapUsageToProject = (projectId: number, data: any) => api.post(`/projects/${projectId}/map-usage`, data)
 export const removeMapUsageFromProject = (usageId: number) => api.delete(`/projects/map-usage/${usageId}`)
+
+// Export points as CSV
+export const exportMapPointsCSV = (versionId: number) => api.get(`/map-points/version/${versionId}/export`, { responseType: 'blob' })

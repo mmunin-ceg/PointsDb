@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm"
 import { IsNotEmpty, IsString, IsBoolean, IsIn, IsOptional, MaxLength } from "class-validator"
 import { ApiProvider } from "./ApiProvider"
 import { MapVersion } from "./MapVersion"
@@ -25,6 +25,7 @@ export class DataInterface {
     protocol: string
 
     @ManyToOne(() => ApiProvider, provider => provider.dataInterfaces)
+    @JoinColumn({ name: "provider_id" })
     @IsNotEmpty({ message: 'Provider is required' })
     provider: ApiProvider
 

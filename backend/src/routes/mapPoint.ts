@@ -155,4 +155,58 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+// Export points as CSV
+router.get("/version/:versionId/export", async (req, res) => {
+    try {
+        const points = await repository.find({
+            where: { version: { id: parseInt(req.params.versionId) } },
+            relations: ["version"]
+        })
+
+        // CSV headers
+        const headers = [
+            'point_name',
+            'object_name',
+            'register',
+            'data_type',
+            'bit_offset',
+            'units',
+            'scale',
+            'alarm_state',
+            'on_state',
+            'off_state',
+            'alarm_limits',
+            'alarm_profile',
+            'enumeration_table',
+            'comments'
+        ].join(',')
+
+        // Convert points to CSV rows
+        const rows = points.map(point => [
+            point.point_name,
+            point.object_name,
+            point.register,
+            point.data_type,
+            point.bit_offset || '',
+            point.units || '',
+            point.scale || '',
+            point.alarm_state || '',
+            point.on_state || '',
+            point.off_state || '',
+            point.alarm_limits || '',
+            point.alarm_profile || '',
+            point.enumeration_table || '',
+            point.comments || ''
+        ].map(val => `"${String(val).replace(/"/g, '""')}"`).join(','))
+
+        const csv = [headers, ...rows].join('\n')
+        
+        res.setHeader('Content-Type', 'text/csv')
+        res.setHeader('Content-Disposition', `attachment; filename="map_points_${req.params.versionId}.csv"`)
+        res.send(csv)
+    } catch (error) {
+        res.status(500).json({ message: "Error exporting points" })
+    }
+})
+
 export default router

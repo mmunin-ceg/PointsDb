@@ -13,13 +13,15 @@ import {
   Snackbar
 } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { TableLayout } from './shared/TableLayout'
 import {
   getMapPoints,
   getMapVersions,
   createMapPoint,
   updateMapPoint,
-  deleteMapPoint
+  deleteMapPoint,
+  exportMapPointsCSV
 } from '../services/api'
 import { MapPoint, MapVersion } from '../types'
 
@@ -51,7 +53,7 @@ export const MapPoints = () => {
   })
 
   const { data: points = [] } = useQuery<MapPoint[]>({
-    queryKey: ['points'],
+    queryKey: ['points', selectedVersion],
     queryFn: async () => {
       const response = await getMapPoints()
       return response.data.filter((point: MapPoint) => point.version.id.toString() === selectedVersion)
@@ -270,6 +272,27 @@ export const MapPoints = () => {
     event.target.value = ''
   }
 
+  const handleExport = async () => {
+    if (!selectedVersion) {
+      setError('Please select a map version first')
+      return
+    }
+
+    try {
+      const response = await exportMapPointsCSV(parseInt(selectedVersion))
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `map_points_${selectedVersion}.csv`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch (error: any) {
+      setError(error.message || 'Error exporting points')
+    }
+  }
+
   const columns = [
     { id: 'point_name', label: 'Point Name', minWidth: 170 },
     { id: 'object_name', label: 'Object Name', minWidth: 130 },
@@ -318,6 +341,14 @@ export const MapPoints = () => {
                 Import CSV
               </Button>
             </label>
+            <Button
+              variant="outlined"
+              startIcon={<FileDownloadIcon />}
+              onClick={handleExport}
+              disabled={!selectedVersion}
+            >
+              Export CSV
+            </Button>
             <Button
               variant="contained"
               onClick={() => handleOpen()}
