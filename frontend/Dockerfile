@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18 as build
+FROM node:lts-slim AS build
 
 WORKDIR /app
 
