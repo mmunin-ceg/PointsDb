@@ -30,8 +30,7 @@ A full-stack application for managing internal and third-party Modbus and DNP3 p
 
 ### Prerequisites
 
-- Docker Desktop for windows, Docker for linux
-- the `init.sql` file contains the current points lists
+- Docker Desktop for windows (WSL2), Docker for linux
 
 ### Installation
 
@@ -40,8 +39,9 @@ A full-stack application for managing internal and third-party Modbus and DNP3 p
    ```bash
    docker compose up -d
    ```
+3. navigate to http://localhost:80
 
-This will build both the frontend and backend services, and start them along with the PostgreSQL database.
+This will build both the frontend and backend services, and start them along with the PostgreSQL database. The web interface is on port 80
 
 ## Database Schema
 
