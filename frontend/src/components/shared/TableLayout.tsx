@@ -6,7 +6,7 @@ interface Column {
   id: string
   label: string
   minWidth?: number
-  format?: (value: any) => string
+  format?: (value: any, row?: any) => string | JSX.Element
 }
 
 interface TableLayoutProps {
@@ -52,7 +52,7 @@ export const TableLayout = ({ title, columns, data, onAdd, onEdit, onDelete }: T
                 <TableRow hover key={index}>
                   {columns.map((column) => (
                     <TableCell key={column.id}>
-                      {column.format ? column.format(row[column.id]) : row[column.id]}
+                      {column.format ? column.format(row[column.id], row) : row[column.id]}
                     </TableCell>
                   ))}
                   {(onEdit || onDelete) && (

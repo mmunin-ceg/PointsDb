@@ -41,8 +41,8 @@ export const getProject = (id: number) => api.get(`/projects/${id}`)
 export const createProject = (data: any) => api.post('/projects', data)
 export const updateProject = (id: number, data: any) => api.put(`/projects/${id}`, data)
 export const deleteProject = (id: number) => api.delete(`/projects/${id}`)
-export const addMapUsageToProject = (projectId: number, data: any) => api.post(`/projects/${projectId}/map-usage`, data)
-export const removeMapUsageFromProject = (usageId: number) => api.delete(`/projects/map-usage/${usageId}`)
+export const addMapUsageToProject = (projectId: number, data: any) => api.post(`/projects/${projectId}/map-usages`, data)
+export const removeMapUsageFromProject = (projectId: number, usageId: number) => api.delete(`/projects/${projectId}/map-usages/${usageId}`)
 
 // Export points as CSV
 export const exportMapPointsCSV = (versionId: number) => api.get(`/map-points/version/${versionId}/export`, { responseType: 'blob' })

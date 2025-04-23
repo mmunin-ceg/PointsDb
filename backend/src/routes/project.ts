@@ -2,10 +2,14 @@ import express, { Router } from "express"
 import { AppDataSource } from "../data-source"
 import { Project } from "../entity/Project"
 import { ProjectMapUsage } from "../entity/ProjectMapUsage"
+import { DataInterface } from "../entity/DataInterface"
+import { MapVersion } from "../entity/MapVersion"
 
 const router = Router()
 const projectRepository = AppDataSource.getRepository(Project)
 const usageRepository = AppDataSource.getRepository(ProjectMapUsage)
+const interfaceRepository = AppDataSource.getRepository(DataInterface)
+const versionRepository = AppDataSource.getRepository(MapVersion)
 
 // Get all projects
 router.get("/", async (req, res) => {
@@ -65,17 +69,45 @@ router.post("/", async (req, res) => {
 // Add map usage to project
 router.post("/:id/map-usages", async (req, res) => {
     try {
+        const { interface_id, version_id, notes } = req.body
+        
+        // Get project
         const project = await projectRepository.findOneBy({ id: parseInt(req.params.id) })
         if (!project) {
             return res.status(404).json({ message: "Project not found" })
         }
+
+        // Get interface
+        const interface_ = await interfaceRepository.findOneBy({ id: parseInt(interface_id) })
+        if (!interface_) {
+            return res.status(404).json({ message: "Interface not found" })
+        }
+
+        // Get version
+        const version = await versionRepository.findOneBy({ id: parseInt(version_id) })
+        if (!version) {
+            return res.status(404).json({ message: "Version not found" })
+        }
+
+        // Create usage with explicit relations
         const usage = usageRepository.create({
-            ...req.body,
-            project
+            project,
+            interface: interface_,
+            version,
+            notes
         })
+
         const result = await usageRepository.save(usage)
-        res.status(201).json(result)
+        
+        // Load relations for response
+        const savedUsage = await usageRepository.findOne({
+            where: { id: result.id },
+            relations: ["interface", "version"]
+        })
+        
+        res.status(201).json(savedUsage)
     } catch (error) {
+        console.error(error)
         res.status(500).json({ message: "Error adding map usage" })
     }
 })

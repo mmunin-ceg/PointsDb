@@ -20,6 +20,7 @@ import {
   Snackbar
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import MapIcon from '@mui/icons-material/Map'
 import { TableLayout } from './shared/TableLayout'
 import {
   getProjects,
@@ -29,9 +30,10 @@ import {
   getDataInterfaces,
   getMapVersionsByInterface,
   addMapUsageToProject,
-  removeMapUsageFromProject
+  removeMapUsageFromProject,
+  getProject
 } from '../services/api'
-import { Project, DataInterface, MapVersion, ProjectMapUsage } from '../types'
+import { Project, DataInterface, MapVersion } from '../types'
 
 export const Projects = () => {
   const queryClient = useQueryClient()
@@ -78,6 +80,16 @@ export const Projects = () => {
     enabled: !!mapUsageFormData.interface_id
   })
 
+  const { data: currentProject } = useQuery<Project>({
+    queryKey: ['project', selectedProject?.id],
+    queryFn: async () => {
+      if (!selectedProject?.id) return null;
+      const response = await getProject(selectedProject.id);
+      return response.data;
+    },
+    enabled: !!selectedProject?.id
+  });
+
   const createMutation = useMutation({
     mutationFn: createProject,
     onSuccess: () => {
@@ -118,23 +130,30 @@ export const Projects = () => {
     mutationFn: ({ projectId, data }: { projectId: number; data: any }) =>
       addMapUsageToProject(projectId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['projects'] })
-      handleMapUsageClose()
-      setSuccess('Map version added successfully')
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['project', selectedProject?.id] });
+      setMapUsageFormData({
+        interface_id: '',
+        version_id: '',
+        notes: ''
+      });
+      setSuccess('Map version added successfully');
     },
     onError: (error: Error) => {
-      setError(error.message || 'Error adding map version')
+      setError(error.message || 'Error adding map version');
     }
   })
 
   const removeMapUsageMutation = useMutation({
-    mutationFn: removeMapUsageFromProject,
+    mutationFn: ({ projectId, usageId }: { projectId: number; usageId: number }) =>
+      removeMapUsageFromProject(projectId, usageId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['projects'] })
-      setSuccess('Map version removed successfully')
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['project', selectedProject?.id] });
+      setSuccess('Map version removed successfully');
     },
     onError: (error: Error) => {
-      setError(error.message || 'Error removing map version')
+      setError(error.message || 'Error removing map version');
     }
   })
 
@@ -201,7 +220,22 @@ export const Projects = () => {
   const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'location', label: 'Location', minWidth: 130 },
-    { id: 'notes', label: 'Notes', minWidth: 200 }
+    { id: 'notes', label: 'Notes', minWidth: 200 },
+    {
+      id: 'actions',
+      label: 'Actions',
+      minWidth: 100,
+      format: (_: any, row: any) => (
+        <Box component="span" onClick={(e) => e.stopPropagation()}>
+          <Button
+            startIcon={<MapIcon />}
+            onClick={() => handleMapUsageOpen(row)}
+          >
+            Map Versions
+          </Button>
+        </Box>
+      )
+    }
   ]
 
   return (
@@ -287,7 +321,7 @@ export const Projects = () => {
       {/* Map Usage Dialog */}
       <Dialog open={mapUsageOpen} onClose={handleMapUsageClose} maxWidth="md" fullWidth>
         <DialogTitle>
-          Manage Map Versions - {selectedProject?.name}
+          Manage Map Versions - {currentProject?.name || selectedProject?.name}
         </DialogTitle>
         <DialogContent>
           <Box sx={{ mb: 3 }}>
@@ -295,7 +329,7 @@ export const Projects = () => {
               Current Map Versions
             </Typography>
             <List>
-              {selectedProject?.mapUsages?.map((usage) => (
+              {currentProject?.mapUsages?.map((usage) => (
                 <ListItem key={usage.id}>
                   <ListItemText
                     primary={`${usage.interface.name} - v${usage.version.version}`}
@@ -304,7 +338,10 @@ export const Projects = () => {
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"
-                      onClick={() => removeMapUsageMutation.mutate(usage.id)}
+                      onClick={() => removeMapUsageMutation.mutate({
+                        projectId: currentProject.id,
+                        usageId: usage.id
+                      })}
                     >
                       <DeleteIcon />
                     </IconButton>

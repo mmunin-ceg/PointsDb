@@ -36,26 +36,45 @@ router.get("/:id", async (req, res) => {
 // Create interface
 router.post("/", async (req, res) => {
     try {
-        const interface_ = repository.create(req.body)
-        const result = await repository.save(interface_)
-        res.status(201).json(result)
+        const { provider_id, ...rest } = req.body;
+        const provider = await AppDataSource.getRepository("ApiProvider").findOneBy({ id: provider_id });
+        
+        if (!provider) {
+            return res.status(400).json({ message: "Provider not found" });
+        }
+
+        const interface_ = repository.create({ ...rest, provider });
+        const result = await repository.save(interface_);
+        res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({ message: "Error creating interface" })
+        console.error(error);
+        res.status(500).json({ message: "Error creating interface" });
     }
 })
 
 // Update interface
 router.put("/:id", async (req, res) => {
     try {
-        const interface_ = await repository.findOneBy({ id: parseInt(req.params.id) })
+        const interface_ = await repository.findOneBy({ id: parseInt(req.params.id) });
         if (!interface_) {
-            return res.status(404).json({ message: "Interface not found" })
+            return res.status(404).json({ message: "Interface not found" });
         }
-        repository.merge(interface_, req.body)
-        const result = await repository.save(interface_)
-        res.json(result)
+
+        const { provider_id, ...rest } = req.body;
+        if (provider_id) {
+            const provider = await AppDataSource.getRepository("ApiProvider").findOneBy({ id: provider_id });
+            if (!provider) {
+                return res.status(400).json({ message: "Provider not found" });
+            }
+            rest.provider = provider;
+        }
+
+        repository.merge(interface_, rest);
+        const result = await repository.save(interface_);
+        res.json(result);
     } catch (error) {
-        res.status(500).json({ message: "Error updating interface" })
+        console.error(error);
+        res.status(500).json({ message: "Error updating interface" });
     }
 })
 
