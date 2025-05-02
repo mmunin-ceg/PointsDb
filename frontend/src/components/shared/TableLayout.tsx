@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button, IconButton, TableSortLabel } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
@@ -7,7 +8,7 @@ interface Column {
   id: string
   label: string
   minWidth?: number
-  format?: (value: any, row?: any) => string | JSX.Element
+  format?: (value: any, row?: any) => string | ReactElement
   sortable?: boolean
 }
 

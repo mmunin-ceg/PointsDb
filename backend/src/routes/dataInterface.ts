@@ -1,94 +1,129 @@
-import express, { Router } from "express"
+import express, { Router, Request, Response, NextFunction } from "express"
 import { AppDataSource } from "../data-source"
 import { DataInterface } from "../entity/DataInterface"
 
 const router = Router()
 const repository = AppDataSource.getRepository(DataInterface)
 
+interface RouteParams {
+    id: string;
+}
+
+interface CreateInterfaceBody {
+    name: string;
+    protocol: string;
+    provider_id: number;
+    is_internal: boolean;
+    description?: string;
+}
+
 // Get all interfaces
-router.get("/", async (req, res) => {
+const getAllInterfaces = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const interfaces = await repository.find({
             relations: ["provider", "mapVersions"]
         })
         res.json(interfaces)
     } catch (error) {
-        res.status(500).json({ message: "Error fetching interfaces" })
+        next(error)
     }
-})
+}
 
 // Get single interface
-router.get("/:id", async (req, res) => {
+const getInterface = async (req: Request<RouteParams>, res: Response, next: NextFunction): Promise<void> => {
     try {
+        if (!req.params.id) {
+            res.status(400).json({ message: "Interface ID is required" })
+            return
+        }
         const interface_ = await repository.findOne({
             where: { id: parseInt(req.params.id) },
             relations: ["provider", "mapVersions"]
         })
         if (!interface_) {
-            return res.status(404).json({ message: "Interface not found" })
+            res.status(404).json({ message: "Interface not found" })
+            return
         }
         res.json(interface_)
     } catch (error) {
-        res.status(500).json({ message: "Error fetching interface" })
+        next(error)
     }
-})
+}
 
 // Create interface
-router.post("/", async (req, res) => {
+const createInterface = async (req: Request<{}, any, CreateInterfaceBody>, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { provider_id, ...rest } = req.body;
-        const provider = await AppDataSource.getRepository("ApiProvider").findOneBy({ id: provider_id });
+        const { provider_id, ...rest } = req.body
+        const provider = await AppDataSource.getRepository("ApiProvider").findOneBy({ id: provider_id })
         
         if (!provider) {
-            return res.status(400).json({ message: "Provider not found" });
+            res.status(400).json({ message: "Provider not found" })
+            return
         }
 
-        const interface_ = repository.create({ ...rest, provider });
-        const result = await repository.save(interface_);
-        res.status(201).json(result);
+        const interface_ = repository.create({ ...rest, provider })
+        const result = await repository.save(interface_)
+        res.status(201).json(result)
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Error creating interface" });
+        next(error)
     }
-})
+}
 
 // Update interface
-router.put("/:id", async (req, res) => {
+const updateInterface = async (req: Request<RouteParams, any, Partial<CreateInterfaceBody>>, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const interface_ = await repository.findOneBy({ id: parseInt(req.params.id) });
+        if (!req.params.id) {
+            res.status(400).json({ message: "Interface ID is required" })
+            return
+        }
+        const interface_ = await repository.findOneBy({ id: parseInt(req.params.id) })
         if (!interface_) {
-            return res.status(404).json({ message: "Interface not found" });
+            res.status(404).json({ message: "Interface not found" })
+            return
         }
 
-        const { provider_id, ...rest } = req.body;
+        const { provider_id, ...rest } = req.body
         if (provider_id) {
-            const provider = await AppDataSource.getRepository("ApiProvider").findOneBy({ id: provider_id });
+            const provider = await AppDataSource.getRepository("ApiProvider").findOneBy({ id: provider_id })
             if (!provider) {
-                return res.status(400).json({ message: "Provider not found" });
+                res.status(400).json({ message: "Provider not found" })
+                return
             }
-            rest.provider = provider;
+            repository.merge(interface_, { ...rest, provider })
+        } else {
+            repository.merge(interface_, rest)
         }
 
-        repository.merge(interface_, rest);
-        const result = await repository.save(interface_);
-        res.json(result);
+        const result = await repository.save(interface_)
+        res.json(result)
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Error updating interface" });
+        next(error)
     }
-})
+}
 
 // Delete interface
-router.delete("/:id", async (req, res) => {
+const deleteInterface = async (req: Request<RouteParams>, res: Response, next: NextFunction): Promise<void> => {
     try {
+        if (!req.params.id) {
+            res.status(400).json({ message: "Interface ID is required" })
+            return
+        }
         const result = await repository.delete(req.params.id)
         if (result.affected === 0) {
-            return res.status(404).json({ message: "Interface not found" })
+            res.status(404).json({ message: "Interface not found" })
+            return
         }
         res.status(204).send()
     } catch (error) {
-        res.status(500).json({ message: "Error deleting interface" })
+        next(error)
     }
-})
+}
+
+// Route handlers
+router.get("/", getAllInterfaces)
+router.get("/:id", getInterface)
+router.post("/", express.json(), createInterface)
+router.put("/:id", express.json(), updateInterface)
+router.delete("/:id", deleteInterface)
 
 export default router

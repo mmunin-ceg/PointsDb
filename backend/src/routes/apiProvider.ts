@@ -1,73 +1,99 @@
-import express, { Router } from "express"
+import express, { Router, Request, Response, NextFunction } from "express"
 import { AppDataSource } from "../data-source"
 import { ApiProvider } from "../entity/ApiProvider"
 
 const router = Router()
 const repository = AppDataSource.getRepository(ApiProvider)
 
+interface RouteParams {
+    id: string;
+}
+
 // Get all API providers
-router.get("/", async (req, res) => {
+const getAllProviders = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const providers = await repository.find()
         res.json(providers)
     } catch (error) {
-        res.status(500).json({ message: "Error fetching providers" })
+        next(error)
     }
-})
+}
 
 // Get single API provider
-router.get("/:id", async (req, res) => {
+const getProvider = async (req: Request<RouteParams>, res: Response, next: NextFunction): Promise<void> => {
     try {
+        if (!req.params.id) {
+            res.status(400).json({ message: "Provider ID is required" })
+            return
+        }
         const provider = await repository.findOne({
             where: { id: parseInt(req.params.id) },
             relations: ["dataInterfaces"]
         })
         if (!provider) {
-            return res.status(404).json({ message: "Provider not found" })
+            res.status(404).json({ message: "Provider not found" })
+            return
         }
         res.json(provider)
     } catch (error) {
-        res.status(500).json({ message: "Error fetching provider" })
+        next(error)
     }
-})
+}
 
 // Create new API provider
-router.post("/", async (req, res) => {
+const createProvider = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const provider = repository.create(req.body)
         const result = await repository.save(provider)
         res.status(201).json(result)
     } catch (error) {
-        res.status(500).json({ message: "Error creating provider" })
+        next(error)
     }
-})
+}
 
 // Update API provider
-router.put("/:id", async (req, res) => {
+const updateProvider = async (req: Request<RouteParams>, res: Response, next: NextFunction): Promise<void> => {
     try {
+        if (!req.params.id) {
+            res.status(400).json({ message: "Provider ID is required" })
+            return
+        }
         const provider = await repository.findOneBy({ id: parseInt(req.params.id) })
         if (!provider) {
-            return res.status(404).json({ message: "Provider not found" })
+            res.status(404).json({ message: "Provider not found" })
+            return
         }
         repository.merge(provider, req.body)
         const result = await repository.save(provider)
         res.json(result)
     } catch (error) {
-        res.status(500).json({ message: "Error updating provider" })
+        next(error)
     }
-})
+}
 
 // Delete API provider
-router.delete("/:id", async (req, res) => {
+const deleteProvider = async (req: Request<RouteParams>, res: Response, next: NextFunction): Promise<void> => {
     try {
+        if (!req.params.id) {
+            res.status(400).json({ message: "Provider ID is required" })
+            return
+        }
         const result = await repository.delete(req.params.id)
         if (result.affected === 0) {
-            return res.status(404).json({ message: "Provider not found" })
+            res.status(404).json({ message: "Provider not found" })
+            return
         }
         res.status(204).send()
     } catch (error) {
-        res.status(500).json({ message: "Error deleting provider" })
+        next(error)
     }
-})
+}
+
+// Route handlers
+router.get("/", getAllProviders)
+router.get("/:id", getProvider)
+router.post("/", express.json(), createProvider)
+router.put("/:id", express.json(), updateProvider)
+router.delete("/:id", deleteProvider)
 
 export default router
