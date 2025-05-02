@@ -37,6 +37,17 @@ export const deleteMapPoint = (id: number) => api.delete(`/map-points/${id}`)
 export const deleteMapPointsByVersion = (versionId: number) => api.delete(`/map-points/version/${versionId}`)
 export const replaceMapPoints = (versionId: number, points: any[]) => api.post(`/map-points/version/${versionId}/replace`, points)
 
+// Export points as CSV
+export const exportMapPointsCSV = (versionId: number) => api.get(`/map-points/version/${versionId}/export`, { responseType: 'blob' })
+
+// Export points as Excel
+export const exportMapPointsExcel = (versionId: number) => api.get(`/map-points/version/${versionId}/export`, { 
+    responseType: 'blob',
+    headers: {
+        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    }
+})
+
 // Project endpoints
 export const getProjects = () => api.get('/projects')
 export const getProject = (id: number) => api.get(`/projects/${id}`)
@@ -45,6 +56,3 @@ export const updateProject = (id: number, data: any) => api.put(`/projects/${id}
 export const deleteProject = (id: number) => api.delete(`/projects/${id}`)
 export const addMapUsageToProject = (projectId: number, data: any) => api.post(`/projects/${projectId}/map-usages`, data)
 export const removeMapUsageFromProject = (projectId: number, usageId: number) => api.delete(`/projects/${projectId}/map-usages/${usageId}`)
-
-// Export points as CSV
-export const exportMapPointsCSV = (versionId: number) => api.get(`/map-points/version/${versionId}/export`, { responseType: 'blob' })

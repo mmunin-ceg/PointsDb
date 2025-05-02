@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import * as XLSX from 'xlsx'
 import {
   Dialog,
   DialogTitle,
@@ -21,7 +22,7 @@ import {
   createMapPoint,
   updateMapPoint,
   deleteMapPoint,
-  exportMapPointsCSV,
+  exportMapPointsExcel,
   replaceMapPoints
 } from '../services/api'
 import { MapPoint, MapVersion } from '../types'
@@ -171,9 +172,10 @@ export const MapPoints = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
+    const scaleValue = formData.get('scale') as string
     const submitData = {
       version_id: Number(formData.get('version_id')),
-      scale: formData.get('scale') ? Number(formData.get('scale')) : undefined,
+      scale: scaleValue === '' ? undefined : Number(scaleValue),
       point_name: formData.get('point_name') as string,
       object_name: formData.get('object_name') as string,
       register: formData.get('register') as string,
@@ -211,73 +213,141 @@ export const MapPoints = () => {
     const reader = new FileReader()
     reader.onload = async (e) => {
       try {
-        const csv = e.target?.result as string
-        const lines = csv.split('\n').filter(line => line.trim()) // Remove empty lines
-        const headers = lines[0].split(',').map(h => h.trim().toLowerCase())
-        
-        // Validate required columns
-        const requiredColumns = ['point_name', 'object_name', 'register', 'data_type']
-        const missingColumns = requiredColumns.filter(col => !headers.includes(col))
-        
-        if (missingColumns.length > 0) {
-          throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
-        }
-        
-        const points = lines.slice(1).map((line, lineIndex) => {
-          const values = line.split(',').map(v => v.trim())
-          if (values.length !== headers.length) {
-            throw new Error(`Invalid number of columns in row ${lineIndex + 2}`)
+        let points: Record<string, any>[] = []
+
+        if (file.name.endsWith('.csv')) {
+          // Handle CSV file
+          const csv = e.target?.result as string
+          const lines = csv.split('\n').filter(line => line.trim())
+          const headers = lines[0].split(',').map(h => h.trim().toLowerCase())
+
+          // Validate required columns
+          const requiredColumns = ['point_name', 'object_name', 'register', 'data_type']
+          const missingColumns = requiredColumns.filter(col => !headers.includes(col))
+          
+          if (missingColumns.length > 0) {
+            throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
           }
 
-          const point: Record<string, any> = {
-            version: {
-              id: parseInt(selectedVersion)
-            },
-            version_id: parseInt(selectedVersion)
-          }
-          
-          headers.forEach((header, index) => {
-            if (values[index]) {
-              if (header === 'scale') {
-                const cleanValue = values[index].replace(/['"]/g, '').trim() // Remove quotes and trim whitespace
-                if (cleanValue) { // Only parse if there's a value
-                  const scale = parseFloat(cleanValue)
-                  if (isNaN(scale)) {
-                    throw new Error(`Invalid scale value '${values[index]}' in row ${lineIndex + 2}. Please ensure it is a valid number.`)
+          points = lines.slice(1).map((line, lineIndex) => {
+            const values = line.split(',').map(v => v.trim())
+            if (values.length !== headers.length) {
+              throw new Error(`Invalid number of columns in row ${lineIndex + 2}`)
+            }
+
+            const point: Record<string, any> = {
+              version: { id: parseInt(selectedVersion) },
+              version_id: parseInt(selectedVersion)
+            }
+
+            headers.forEach((header, index) => {
+              if (values[index]) {
+                if (header === 'scale') {
+                  const cleanValue = values[index].replace(/['"]/g, '').trim()
+                  if (cleanValue === '') {
+                    point[header] = undefined;
+                  } else {
+                    const scale = parseFloat(cleanValue)
+                    if (isNaN(scale)) {
+                      throw new Error(`Invalid scale value '${values[index]}' in row ${lineIndex + 2}`)
+                    }
+                    point[header] = scale
                   }
-                  point[header] = scale
+                } else {
+                  point[header] = values[index].trim()
                 }
-              } else {
-                point[header] = values[index].trim()
               }
-            }
+            })
+
+            // Validate required fields
+            requiredColumns.forEach(field => {
+              if (!point[field]) {
+                throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
+              }
+            })
+
+            return point
           })
+        } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+          // Handle Excel file
+          const data = e.target?.result as ArrayBuffer
+          const workbook = XLSX.read(data, { type: 'array' })
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]]
+          const rows = XLSX.utils.sheet_to_json(firstSheet, { header: 1 }) as any[]
+
+          if (rows.length === 0) {
+            throw new Error('Excel file is empty')
+          }
+
+          const headers = rows[0].map((h: string) => h.toLowerCase().trim())
           
-          // Validate required fields
-          requiredColumns.forEach(field => {
-            if (!point[field]) {
-              throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
+          // Validate required columns
+          const requiredColumns = ['point_name', 'object_name', 'register', 'data_type']
+          const missingColumns = requiredColumns.filter(col => !headers.includes(col))
+          
+          if (missingColumns.length > 0) {
+            throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
+          }
+
+          points = rows.slice(1).map((row: any[], lineIndex: number) => {
+            const point: Record<string, any> = {
+              version: { id: parseInt(selectedVersion) },
+              version_id: parseInt(selectedVersion)
             }
+
+            headers.forEach((header: string, index: number) => {
+              if (row[index] !== undefined && row[index] !== null) {
+                if (header === 'scale') {
+                  if (row[index] === '' || row[index] === null || row[index] === undefined) {
+                    point[header] = undefined;
+                  } else {
+                    const scale = parseFloat(row[index]);
+                    if (isNaN(scale)) {
+                      throw new Error(`Invalid scale value '${row[index]}' in row ${lineIndex + 2}`);
+                    }
+                    point[header] = scale;
+                  }
+                } else {
+                  point[header] = String(row[index]).trim();
+                }
+              }
+            })
+
+            // Validate required fields
+            requiredColumns.forEach(field => {
+              if (!point[field]) {
+                throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
+              }
+            })
+
+            return point
           })
-          
-          return point
-        })
-        
-        if (points.length === 0) {
-          throw new Error('No valid points found in CSV')
+        } else {
+          throw new Error('Unsupported file type. Please upload a CSV or Excel file.')
         }
 
-        // Instead of immediate import, set confirmation state
+        if (points.length === 0) {
+          throw new Error('No valid points found in file')
+        }
+
+        // Set confirmation state
         setConfirmImport({ file, points })
 
       } catch (error: any) {
         setError(error.message || 'Error importing points')
       }
     }
+
     reader.onerror = () => {
       setError('Error reading file')
     }
-    reader.readAsText(file)
+
+    if (file.name.endsWith('.csv')) {
+      reader.readAsText(file)
+    } else {
+      reader.readAsArrayBuffer(file)
+    }
+    
     // Clear the file input for future uploads
     event.target.value = ''
   }
@@ -307,13 +377,13 @@ export const MapPoints = () => {
     }
 
     try {
-      const response = await exportMapPointsCSV(parseInt(selectedVersion))
+      const response = await exportMapPointsExcel(parseInt(selectedVersion))
       const currentVersion = versions.find(v => v.id.toString() === selectedVersion)
       if (!currentVersion) {
         throw new Error('Selected version not found')
       }
-      const fileName = `${currentVersion.interface.name}_v${currentVersion.version}_points.csv`
-        .replace(/[^a-z0-9-_\.]/gi, '_') // Replace any special characters with underscores
+      const fileName = `${currentVersion.interface.name}_v${currentVersion.version}_points.xlsx`
+        .replace(/[^a-z0-9-_\.]/gi, '_')
       const url = window.URL.createObjectURL(new Blob([response.data]))
       const link = document.createElement('a')
       link.href = url
@@ -339,7 +409,12 @@ export const MapPoints = () => {
 
   return (
     <>
-      <Box sx={{ width: '100%', padding: 2 }}>
+      <Box sx={{ 
+        width: '100%', 
+        height: 'calc(100vh - 112px)', // Account for AppBar (64px) and padding (48px)
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <Box sx={{ flex: '0 0 33.33%' }}>
             <TextField
@@ -358,7 +433,7 @@ export const MapPoints = () => {
           </Box>
           <Box sx={{ flex: '1 1 auto', display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
             <input
-              accept=".csv"
+              accept=".xlsx,.xls,.csv"
               style={{ display: 'none' }}
               id="bulk-import"
               type="file"
@@ -372,7 +447,7 @@ export const MapPoints = () => {
                 startIcon={<CloudUploadIcon />}
                 disabled={!selectedVersion}
               >
-                Import CSV
+                Import File
               </Button>
             </label>
             <Button
@@ -381,7 +456,7 @@ export const MapPoints = () => {
               onClick={handleExport}
               disabled={!selectedVersion}
             >
-              Export CSV
+              Export Excel
             </Button>
             <Button
               variant="contained"

@@ -49,11 +49,24 @@ router.get("/interface/:interfaceId", async (req, res) => {
 // Create version
 router.post("/", async (req, res) => {
     try {
-        const version = repository.create(req.body)
-        const result = await repository.save(version)
-        res.status(201).json(result)
+        // Create a proper entity object with the interface relation
+        const version = repository.create({
+            ...req.body,
+            interface: { id: req.body.interface_id }  // Transform interface_id to proper relation format
+        });
+        const saveResult = await repository.save(version);
+        const result = Array.isArray(saveResult) ? saveResult[0] : saveResult;
+
+        // Return the saved version with its relationships loaded
+        const savedVersion = await repository.findOne({
+            where: { id: result.id },
+            relations: ["interface", "points"]
+        });
+
+        res.status(201).json(savedVersion);
     } catch (error) {
-        res.status(500).json({ message: "Error creating version" })
+        console.error('Error creating version:', error);
+        res.status(500).json({ message: "Error creating version" });
     }
 })
 

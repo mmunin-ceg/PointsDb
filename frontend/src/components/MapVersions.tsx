@@ -7,7 +7,8 @@ import {
   TextField,
   DialogActions,
   Button,
-  MenuItem
+  MenuItem,
+  Box
 } from '@mui/material'
 import { TableLayout } from './shared/TableLayout'
 import {
@@ -137,7 +138,11 @@ export const MapVersions = () => {
   ]
 
   return (
-    <>
+    <Box sx={{ 
+      height: 'calc(100vh - 112px)', // Account for AppBar (64px) and padding (48px)
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <TableLayout
         title="Map Versions"
         columns={columns}
@@ -218,6 +223,6 @@ export const MapVersions = () => {
           </DialogActions>
         </form>
       </Dialog>
-    </>
+    </Box>
   )
 }

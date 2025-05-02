@@ -9,7 +9,8 @@ import {
   Button,
   Switch,
   FormControlLabel,
-  MenuItem
+  MenuItem,
+  Box
 } from '@mui/material'
 import { TableLayout } from './shared/TableLayout'
 import {
@@ -147,7 +148,11 @@ export const DataInterfaces = () => {
   ]
 
   return (
-    <>
+    <Box sx={{ 
+      height: 'calc(100vh - 112px)', // Account for AppBar (64px) and padding (48px)
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <TableLayout
         title="Data Interfaces"
         columns={columns}
@@ -241,6 +246,6 @@ export const DataInterfaces = () => {
           </DialogActions>
         </form>
       </Dialog>
-    </>
+    </Box>
   )
 }

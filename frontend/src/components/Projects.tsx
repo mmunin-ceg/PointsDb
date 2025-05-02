@@ -240,7 +240,11 @@ export const Projects = () => {
   ]
 
   return (
-    <>
+    <Box sx={{ 
+      height: 'calc(100vh - 112px)', // Account for AppBar (64px) and padding (48px)
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <TableLayout
         title="Projects"
         columns={columns}
@@ -423,6 +427,6 @@ export const Projects = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Box>
   )
 }

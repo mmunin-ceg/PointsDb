@@ -61,7 +61,12 @@ export const TableLayout = ({ title, columns, data, onAdd, onEdit, onDelete }: T
   })
 
   return (
-    <Box sx={{ width: '100%', padding: 2 }}>
+    <Box sx={{ 
+      display: 'flex', 
+      flexDirection: 'column',
+      height: '100%',
+      width: '100%'
+    }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Typography variant="h5" component="h2">
           {title}
@@ -72,8 +77,8 @@ export const TableLayout = ({ title, columns, data, onAdd, onEdit, onDelete }: T
           </Button>
         )}
       </Box>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+      <Paper sx={{ flex: 1, width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <TableContainer sx={{ flex: 1 }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>

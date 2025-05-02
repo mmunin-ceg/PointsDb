@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
-import { IsNotEmpty, IsString, IsOptional, IsNumber, MaxLength } from "class-validator"
+import { IsNotEmpty, IsString, IsOptional, IsNumber, MaxLength, ValidateIf } from "class-validator"
 import { MapVersion } from "./MapVersion"
 
 @Entity()
@@ -46,7 +46,8 @@ export class MapPoint {
     units: string
 
     @Column({ type: "real", nullable: true })
-    @IsNumber()
+    @ValidateIf((o) => o.scale !== null && o.scale !== undefined && o.scale !== '')
+    @IsNumber({}, { message: 'Scale must be a valid number if provided' })
     @IsOptional()
     scale: number
 

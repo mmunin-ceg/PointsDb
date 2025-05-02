@@ -1,5 +1,6 @@
 import express, { Router } from "express"
 import { validate } from "class-validator"
+import * as XLSX from 'xlsx'
 import { AppDataSource } from "../data-source"
 import { MapPoint } from "../entity/MapPoint"
 
@@ -175,7 +176,8 @@ router.get("/version/:versionId/export", async (req, res) => {
             relations: ["version"]
         })
 
-        // CSV headers
+        // Create workbook and worksheet
+        const wb = XLSX.utils.book_new()
         const headers = [
             'point_name',
             'object_name',
@@ -191,9 +193,9 @@ router.get("/version/:versionId/export", async (req, res) => {
             'alarm_profile',
             'enumeration_table',
             'comments'
-        ].join(',')
+        ]
 
-        // Convert points to CSV rows without quotes
+        // Convert points to array format for Excel
         const rows = points.map(point => [
             point.point_name,
             point.object_name,
@@ -209,13 +211,18 @@ router.get("/version/:versionId/export", async (req, res) => {
             point.alarm_profile || '',
             point.enumeration_table || '',
             point.comments || ''
-        ].join(','))
+        ])
 
-        const csv = [headers, ...rows].join('\n')
+        const wsData = [headers, ...rows]
+        const ws = XLSX.utils.aoa_to_sheet(wsData)
+        XLSX.utils.book_append_sheet(wb, ws, "Points")
         
-        res.setHeader('Content-Type', 'text/csv')
-        res.setHeader('Content-Disposition', `attachment; filename="map_points_${req.params.versionId}.csv"`)
-        res.send(csv)
+        // Generate Excel file
+        const excelBuffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' })
+        
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        res.setHeader('Content-Disposition', `attachment; filename="map_points_${req.params.versionId}.xlsx"`)
+        res.send(excelBuffer)
     } catch (error) {
         res.status(500).json({ message: "Error exporting points" })
     }
