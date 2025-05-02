@@ -401,6 +401,7 @@ export const MapPoints = () => {
     { id: 'point_name', label: 'Point Name', minWidth: 170, sortable: true },
     { id: 'object_name', label: 'Object Name', minWidth: 130, sortable: true },
     { id: 'register', label: 'Register', minWidth: 100, sortable: true },
+    { id: 'bit_offset', label: 'Bit', minWidth: 70, sortable: true },
     { id: 'data_type', label: 'Data Type', minWidth: 100, sortable: true },
     { id: 'units', label: 'Units', minWidth: 100, sortable: true },
     { id: 'scale', label: 'Scale', minWidth: 70, sortable: true },

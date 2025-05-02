@@ -79,7 +79,7 @@ export const TableLayout = ({ title, columns, data, onAdd, onEdit, onDelete }: T
       </Box>
       <Paper sx={{ flex: 1, width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         <TableContainer sx={{ flex: 1 }}>
-          <Table stickyHeader>
+          <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
@@ -87,6 +87,7 @@ export const TableLayout = ({ title, columns, data, onAdd, onEdit, onDelete }: T
                     key={column.id}
                     style={{ minWidth: column.minWidth }}
                     sortDirection={orderBy === column.id ? order : false}
+                    sx={{ padding: '6px 16px' }}
                   >
                     {column.sortable !== false ? (
                       <TableSortLabel
@@ -106,24 +107,26 @@ export const TableLayout = ({ title, columns, data, onAdd, onEdit, onDelete }: T
             </TableHead>
             <TableBody>
               {sortedData.map((row, index) => (
-                <TableRow hover key={index}>
+                <TableRow hover key={index} sx={{ height: '40px' }}>
                   {columns.map((column) => (
-                    <TableCell key={column.id}>
+                    <TableCell key={column.id} sx={{ padding: '6px 16px' }}>
                       {column.format ? column.format(row[column.id], row) : row[column.id]}
                     </TableCell>
                   ))}
                   {(onEdit || onDelete) && (
-                    <TableCell>
-                      {onEdit && (
-                        <IconButton onClick={() => onEdit(row)}>
-                          <EditIcon />
-                        </IconButton>
-                      )}
-                      {onDelete && (
-                        <IconButton onClick={() => onDelete(row)}>
-                          <DeleteIcon />
-                        </IconButton>
-                      )}
+                    <TableCell sx={{ padding: '6px 16px' }}>
+                      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                        {onEdit && (
+                          <IconButton onClick={() => onEdit(row)} size="small">
+                            <EditIcon />
+                          </IconButton>
+                        )}
+                        {onDelete && (
+                          <IconButton onClick={() => onDelete(row)} size="small">
+                            <DeleteIcon />
+                          </IconButton>
+                        )}
+                      </Box>
                     </TableCell>
                   )}
                 </TableRow>
