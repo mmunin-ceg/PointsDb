@@ -77,11 +77,12 @@ export const ApiProviders = () => {
   }
 
   const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
+    { id: 'name', label: 'Name', minWidth: 170, sortable: true },
     {
       id: 'is_internal',
       label: 'Internal',
       minWidth: 100,
+      sortable: true,
       format: (value: boolean) => (value ? 'Yes' : 'No')
     }
   ]

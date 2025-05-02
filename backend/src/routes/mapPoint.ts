@@ -155,6 +155,18 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+// Delete all points for a version
+router.delete("/version/:versionId", async (req, res) => {
+    try {
+        const result = await repository.delete({ 
+            version: { id: parseInt(req.params.versionId) } 
+        })
+        res.status(204).send()
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting points" })
+    }
+})
+
 // Export points as CSV
 router.get("/version/:versionId/export", async (req, res) => {
     try {
@@ -181,7 +193,7 @@ router.get("/version/:versionId/export", async (req, res) => {
             'comments'
         ].join(',')
 
-        // Convert points to CSV rows
+        // Convert points to CSV rows without quotes
         const rows = points.map(point => [
             point.point_name,
             point.object_name,
@@ -197,7 +209,7 @@ router.get("/version/:versionId/export", async (req, res) => {
             point.alarm_profile || '',
             point.enumeration_table || '',
             point.comments || ''
-        ].map(val => `"${String(val).replace(/"/g, '""')}"`).join(','))
+        ].join(','))
 
         const csv = [headers, ...rows].join('\n')
         
@@ -206,6 +218,59 @@ router.get("/version/:versionId/export", async (req, res) => {
         res.send(csv)
     } catch (error) {
         res.status(500).json({ message: "Error exporting points" })
+    }
+})
+
+// Replace all points for a version
+router.post("/version/:versionId/replace", async (req, res) => {
+    const queryRunner = AppDataSource.createQueryRunner()
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+
+    try {
+        // Delete existing points
+        await queryRunner.manager.delete(MapPoint, { 
+            version: { id: parseInt(req.params.versionId) } 
+        })
+
+        // Create new points with validation
+        const points = queryRunner.manager.create(MapPoint, req.body)
+        
+        // Validate all points
+        const validationPromises = Array.isArray(points) 
+            ? points.map(point => validate(point))
+            : [validate(points)]
+            
+        const validationResults = await Promise.all(validationPromises)
+        const errors = validationResults.flatMap((result, index) => 
+            result.map(error => ({
+                point: index,
+                property: error.property,
+                constraints: error.constraints
+            }))
+        )
+
+        if (errors.length > 0) {
+            await queryRunner.rollbackTransaction()
+            return res.status(400).json({
+                message: "Validation failed",
+                errors
+            })
+        }
+
+        // Save new points
+        const result = await queryRunner.manager.save(points)
+        
+        await queryRunner.commitTransaction()
+        res.status(201).json(result)
+    } catch (error: any) {
+        await queryRunner.rollbackTransaction()
+        res.status(500).json({ 
+            message: "Error replacing points",
+            error: error.message
+        })
+    } finally {
+        await queryRunner.release()
     }
 })
 

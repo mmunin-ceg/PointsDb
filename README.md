@@ -2,6 +2,7 @@
 
 A full-stack application for managing internal and third-party Modbus and DNP3 point mappings.
 
+
 ## Features
 
 - Management of API providers (vendors and internal sources)

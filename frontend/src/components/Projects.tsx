@@ -218,13 +218,14 @@ export const Projects = () => {
   }
 
   const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'location', label: 'Location', minWidth: 130 },
-    { id: 'notes', label: 'Notes', minWidth: 200 },
+    { id: 'name', label: 'Name', minWidth: 170, sortable: true },
+    { id: 'location', label: 'Location', minWidth: 130, sortable: true },
+    { id: 'notes', label: 'Notes', minWidth: 200, sortable: true },
     {
       id: 'actions',
       label: 'Actions',
       minWidth: 100,
+      sortable: false,
       format: (_: any, row: any) => (
         <Box component="span" onClick={(e) => e.stopPropagation()}>
           <Button

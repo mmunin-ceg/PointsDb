@@ -127,21 +127,23 @@ export const DataInterfaces = () => {
   }
 
   const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'protocol', label: 'Protocol', minWidth: 100 },
+    { id: 'name', label: 'Name', minWidth: 170, sortable: true },
+    { id: 'protocol', label: 'Protocol', minWidth: 100, sortable: true },
     {
       id: 'provider',
       label: 'Provider',
       minWidth: 130,
+      sortable: true,
       format: (value: ApiProvider) => value.name
     },
     {
       id: 'is_internal',
       label: 'Internal',
       minWidth: 100,
+      sortable: true,
       format: (value: boolean) => (value ? 'Yes' : 'No')
     },
-    { id: 'description', label: 'Description', minWidth: 200 }
+    { id: 'description', label: 'Description', minWidth: 200, sortable: true }
   ]
 
   return (

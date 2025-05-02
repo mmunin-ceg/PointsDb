@@ -2115,7 +2115,7 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 1775	4	Logger AC power available	Holding Register	40029	32-bit float	\N	boolean	1	\N	On	Off	\N	\N	0 to 1	\N
 1776	4	Batt voltage	Holding Register	40031	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
 1779	4	Input voltage 1	Holding Register	40037	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
-1780	4	Chargesource	Holding Register	40041	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	\N	0 = None, 1 = Solar, 2 = AC Power
+1780	4	Chargesource	Holding Register	40041	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	\N	0 = None; 1 = Solar; 2 = AC Power
 1781	4	Checkbattery	Holding Register	40043	32-bit float	\N	boolean	1	\N	Alarm	Alarm	\N	\N	\N	\N
 1782	4	Input voltage 2	Holding Register	40045	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
 1783	4	POA	Holding Register	40047	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
@@ -2601,15 +2601,15 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2263	6	BOM temp soiled	Holding Register	40547	32-bit float	\N	DegF	1	\N	\N	\N	\N	\N	\N	\N
 2264	6	Daily soiling quality	Holding Register	40617	32-bit float	\N	%	1	\N	\N	\N	\N	\N	\N	\N
 2265	6	Daily soiling age	Holding Register	40619	32-bit float	\N	days	1	\N	\N	\N	\N	\N	\N	\N
-2266	7	Soiling Ratio Sensor 1	Input Register	30021	16-bit Unsigned Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%, 9999 when not valid
-2267	7	Transmission Loss Sensor 1	Input Register	30022	16-bit Signed Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%, 9999 when not valid
-2268	7	Soiling Ratio Sensor 2	Input Register	30025	16-bit Unsigned Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%, 9999 when not valid
-2269	7	Transmission Loss Sensor 2	Input Register	30026	16-bit Signed Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%, 9999 when not valid
+2266	7	Soiling Ratio Sensor 1	Input Register	30021	16-bit Unsigned Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%; 9999 when not valid
+2267	7	Transmission Loss Sensor 1	Input Register	30022	16-bit Signed Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%; 9999 when not valid
+2268	7	Soiling Ratio Sensor 2	Input Register	30025	16-bit Unsigned Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%; 9999 when not valid
+2269	7	Transmission Loss Sensor 2	Input Register	30026	16-bit Signed Integer	\N	%	0.1	\N	\N	\N	\N	\N	\N	In steps of  0.1%; 9999 when not valid
 2270	7	Tilt X Direction ( Long Axis)	Input Register	30029	16-bit Signed Integer	\N	Degrees	0.1	\N	\N	\N	\N	\N	\N	In steps of 0.1 degrees
 2271	7	Tilt Y Direction (Short Axis)	Input Register	30030	16-bit Signed Integer	\N	Degrees	0.1	\N	\N	\N	\N	\N	\N	In steps of 0.1 degrees
 2272	7	Back Panel Temperature 	Input Register	30032	16-bit Unsigned Integer	\N	Deg K	0.1	\N	\N	\N	\N	\N	\N	In steps 0.1 Kelvin
 2273	7	Device Voltage	Input Register	30033	16-bit Unsigned Integer	\N	mV	1	\N	\N	\N	\N	\N	\N	Device voltage at the input connector
-2274	7	Operational Mode	Input Register	30034	16-bit Unsigned Integer	\N	degrees	1	\N	\N	\N	\N	\N	Normal = 1, Service = 2, Calibration = 3	\N
+2274	7	Operational Mode	Input Register	30034	16-bit Unsigned Integer	\N	degrees	1	\N	\N	\N	\N	\N	Normal = 1; Service = 2; Calibration = 3	\N
 2275	7	Device Status Flags	Input Register	30035	16-bit Unsigned Integer	\N	degrees	1	\N	\N	\N	\N	\N	0 = Status OK	\N
 2276	8	Scan count	Holding Register	40001	32-bit float	\N	Sec	1	\N	\N	\N	\N	\N	\N	\N
 2277	8	Skipped scans	Holding Register	40003	32-bit float	\N	Count	1	\N	\N	\N	\N	\N	\N	\N
@@ -2618,20 +2618,20 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2280	8	Skipped slow scans	Holding Register	40009	32-bit float	\N	Count	1	\N	\N	\N	\N	\N	\N	\N
 2281	8	Logger lithium	Holding Register	40011	32-bit float	\N	Volts DC	1	\N	\N	\N	\N	\N	\N	\N
 2282	8	Logger low volt 12	Holding Register	40013	32-bit float	\N	Count	1	\N	\N	\N	\N	\N	\N	\N
-2283	8	Solar zenith	Holding Register	40017	32-bit float	\N	Degrees	1	\N	\N	\N	\N	\N	\N	Calculated using lat, lon, elevation, Temp, pressure
-2284	8	Solar elevation	Holding Register	40019	32-bit float	\N	Degrees	1	\N	\N	\N	\N	\N	\N	Calculated using lat, lon, elevation, Temp, pressure
-2285	8	Solar azimuth	Holding Register	40021	32-bit float	\N	Degrees	1	\N	\N	\N	\N	\N	\N	Calculated using lat, lon, elevation, Temp, pressure
-2286	8	Pyranometer heaters on/off	Holding Register	40023	32-bit float	\N	Enumeration	1	\N	\N	\N	\N	\N	\N	 0 = Off, -1 = On.  Heat_State on only when vent fan is running
+2283	8	Solar zenith	Holding Register	40017	32-bit float	\N	Degrees	1	\N	\N	\N	\N	\N	\N	Calculated using lat; lon; elevation; Temp; pressure
+2284	8	Solar elevation	Holding Register	40019	32-bit float	\N	Degrees	1	\N	\N	\N	\N	\N	\N	Calculated using lat; lon; elevation; Temp; pressure
+2285	8	Solar azimuth	Holding Register	40021	32-bit float	\N	Degrees	1	\N	\N	\N	\N	\N	\N	Calculated using lat; lon; elevation; Temp; pressure
+2286	8	Pyranometer heaters on/off	Holding Register	40023	32-bit float	\N	Enumeration	1	\N	\N	\N	\N	\N	\N	 0 = Off; -1 = On.  Heat_State on only when vent fan is running
 2287	8	Logger data map version	Holding Register	40025	32-bit float	\N	Unitless	1	\N	\N	\N	\N	\N	\N	\N
-2288	8	Maint event	Holding Register	40027	32-bit float	\N	Boolean	1	\N	Maint ON	Maint OFF	\N	\N	\N	0 = nominal operation, 1 = maintenance button pushed in last five minutes
-2289	8	Logger AC Power	Holding Register	40029	32-bit float	\N	Boolean	1	\N	Normal	Alarm	\N	\N	\N	0 = no AC power, 1 = AC power
+2288	8	Maint event	Holding Register	40027	32-bit float	\N	Boolean	1	\N	Maint ON	Maint OFF	\N	\N	\N	0 = nominal operation; 1 = maintenance button pushed in last five minutes
+2289	8	Logger AC Power	Holding Register	40029	32-bit float	\N	Boolean	1	\N	Normal	Alarm	\N	\N	\N	0 = no AC power; 1 = AC power
 2290	8	Battery Voltage	Holding Register	40031	32-bit float	\N	Volts DC	1	\N	\N	\N	\N	\N	\N	\N
-2291	8	Battery Current	Holding Register	40033	32-bit float	\N	Amps	1	\N	\N	\N	\N	\N	\N	+ if battery charging, - if battery discharging
+2291	8	Battery Current	Holding Register	40033	32-bit float	\N	Amps	1	\N	\N	\N	\N	\N	\N	+ if battery charging; - if battery discharging
 2292	8	Load Current	Holding Register	40035	32-bit float	\N	Amps	1	\N	\N	\N	\N	\N	\N	\N
-2293	8	Solar Panel Voltage	Holding Register	40037	32-bit float	\N	Volts DC	1	\N	\N	\N	\N	\N	\N	When both inputs are utilized, the higher voltage power source will be selected
-2294	8	Charge Source	Holding Register	40041	32-bit float	\N	Enumeration	1	\N	\N	\N	\N	\N	\N	0 = none, 1 = solar, 2 = AC/DC power supply
-2295	8	Battery Status	Holding Register	40043	32-bit float	\N	Boolean	1	\N	Alarm	Normal	\N	\N	\N	0 = normal, 1 = check battery
-2296	8	Power Supply Voltage	Holding Register	40045	32-bit float	\N	Volts DC	1	\N	\N	\N	\N	\N	\N	When both inputs are utilized, the higher voltage power source will be selected
+2293	8	Solar Panel Voltage	Holding Register	40037	32-bit float	\N	Volts DC	1	\N	\N	\N	\N	\N	\N	When both inputs are utilized; the higher voltage power source will be selected
+2294	8	Charge Source	Holding Register	40041	32-bit float	\N	Enumeration	1	\N	\N	\N	\N	\N	\N	0 = none; 1 = solar; 2 = AC/DC power supply
+2295	8	Battery Status	Holding Register	40043	32-bit float	\N	Boolean	1	\N	Alarm	Normal	\N	\N	\N	0 = normal; 1 = check battery
+2296	8	Power Supply Voltage	Holding Register	40045	32-bit float	\N	Volts DC	1	\N	\N	\N	\N	\N	\N	When both inputs are utilized; the higher voltage power source will be selected
 2297	8	GHI	Holding Register	40053	32-bit float	\N	W/m┬▓	1	\N	\N	\N	\N	\N	\N	Warning: not Temp-corrected
 2298	8	GHI Temp Corr	Holding Register	40055	32-bit float	\N	W/m┬▓	1	\N	\N	\N	\N	\N	\N	Most accurate irradiance value
 2299	8	GHI Pyranometer Temp	Holding Register	40057	32-bit float	\N	Deg C	1	\N	\N	\N	\N	\N	\N	\N
@@ -2648,10 +2648,10 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2310	8	Albedometer RHI	Holding Register	40603	32-bit float	\N	W/m┬▓	1	\N	\N	\N	\N	\N	\N	Warning: not Temp-corrected.
 2311	8	Albedometer RHI Temp Corr	Holding Register	40605	32-bit float	\N	W/m┬▓	1	\N	\N	\N	\N	\N	\N	Most accurate irradiance value.
 2312	8	Abledometer RHI Temp	Holding Register	40607	32-bit float	\N	Deg C	1	\N	\N	\N	\N	\N	\N	\N
-2313	8	Albedo	Holding Register	40609	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Calculated value: RHI_1 / GHI_1, See Daily_Albedo for filtered value
-2314	8	Albedo Temp Corr	Holding Register	40611	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Calculated value: RHI_TC_1 / GHI_TC_1, See Daily_Albedo for filtered value
-2315	8	Daily Avg Albedo	Holding Register	40613	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Avg of albedo values, solar noon ┬▒30 minutes
-2316	8	Daily Avg Albedo Temp Corr	Holding Register	40615	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Avg of Temp-corrected albedo values, solar noon ┬▒30 minutes
+2313	8	Albedo	Holding Register	40609	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Calculated value: RHI_1 / GHI_1; See Daily_Albedo for filtered value
+2314	8	Albedo Temp Corr	Holding Register	40611	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Calculated value: RHI_TC_1 / GHI_TC_1; See Daily_Albedo for filtered value
+2315	8	Daily Avg Albedo	Holding Register	40613	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Avg of albedo values; solar noon ┬▒30 minutes
+2316	8	Daily Avg Albedo Temp Corr	Holding Register	40615	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	Avg of Temp-corrected albedo values; solar noon ┬▒30 minutes
 2317	8	Hourly Avg Abledometer GHI	Holding Register	40647	32-bit float	\N	W/m┬▓	1	\N	\N	\N	\N	\N	\N	\N
 2318	8	Hourly Avg Abledometer GHI Temp Corr	Holding Register	40649	32-bit float	\N	W/m┬▓	1	\N	\N	\N	\N	\N	\N	\N
 2319	8	Hourly Avg Albedometer GHI Temp	Holding Register	40651	32-bit float	\N	Deg C	1	\N	\N	\N	\N	\N	\N	\N
@@ -2672,8 +2672,8 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2334	9	Fan speed	Holding Register	40197	16-bit unsigned integer	\N	RPM	1	\N	\N	\N	\N	\N	\N	\N
 2335	9	Heater current	Holding Register	40200	16-bit unsigned integer	\N	A	0.001	\N	\N	\N	\N	\N	\N	\N
 2336	10	Inv [n] status	Analog input	0	32-bit float	\N	enumeration	1	None	\N	\N	\N	\N	Inverter Status:\n0 - Not communicating\n1 - Fault\n2 - Stopped\n3 - Running\n	\N
-2337	10	Inv [n] active power	Analog input	1	32-bit float	\N	kW	1	Analog	\N	\N	n/a,-10,3620,n/a	Out of Band	\N	\N
-2338	10	Inv [n] reactive power	Analog input	2	32-bit float	\N	kvar	1	Analog	\N	\N	n/a,-2180,2180,n/a	Out of Band	\N	\N
+2337	10	Inv [n] active power	Analog input	1	32-bit float	\N	kW	1	Analog	\N	\N	n/a;-10;3620;n/a	Out of Band	\N	\N
+2338	10	Inv [n] reactive power	Analog input	2	32-bit float	\N	kvar	1	Analog	\N	\N	n/a;-2180;2180;n/a	Out of Band	\N	\N
 2339	10	Inv [n] phase A current	Analog input	3	32-bit float	\N	A	1	None	\N	\N	\N	\N	\N	\N
 2340	10	Inv [n] phase B current	Analog input	4	32-bit float	\N	A	1	None	\N	\N	\N	\N	\N	\N
 2341	10	Inv [n] phase C current	Analog input	5	32-bit float	\N	A	1	None	\N	\N	\N	\N	\N	\N
@@ -2682,20 +2682,20 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2344	10	Inv [n] phase CA voltage	Analog input	8	32-bit float	\N	V	1	None	\N	\N	\N	\N	\N	\N
 2345	10	Inv [n] power factor	Analog input	9	32-bit float	\N	PU	1	None	\N	\N	\N	\N	\N	\N
 2346	10	Inv [n] frequency	Analog input	10	32-bit float	\N	Hz	1	None	\N	\N	\N	\N	\N	\N
-2347	10	Inv [n] active power setpoint	Analog input	11	32-bit float	\N	kW	1	Analog	\N	\N	n/a,0,3600,n/a	Out of Band	\N	\N
+2347	10	Inv [n] active power setpoint	Analog input	11	32-bit float	\N	kW	1	Analog	\N	\N	n/a;0;3600;n/a	Out of Band	\N	\N
 2348	10	Inv [n] active power setpoint feedback	Analog input	12	32-bit float	\N	kW	1	Analog	\N	\N	AI_0010 +/- 1%	Not at Setpoint	\N	\N
-2349	10	Inv [n] reactive power mode	Analog input	13	32-bit signed integer	\N	enumeration	1	State change	\N	\N	\N	\N	Reactive power mode:\n0 - OFF (unregulated unity PF)\n1 - Reactive output mode\n2 - Power factor mode\n3 - Voltage regulation\n98 - QU mode\n99 - QP mode	Q(U) and Q(P) modes are not used, but are defined
-2350	10	Inv [n] reactive power mode feedback	Analog input	14	32-bit signed integer	\N	enumeration	1	Analog	\N	\N	AI_0012 +/- 1%	Not at Setpoint	Reactive power mode:\n0 - OFF (unregulated unity PF)\n1 - Reactive output mode\n2 - Power factor mode\n3 - Voltage regulation\n98 - QU mode\n99 - QP mode	Q(U) and Q(P) modes are not used, but are defined
-2351	10	Inv [n] reactive power setpoint	Analog input	15	32-bit float	\N	kvar or PU 	1	Analog	\N	\N	-2160,-1,1,2160	5-State	\N	\N
+2349	10	Inv [n] reactive power mode	Analog input	13	32-bit signed integer	\N	enumeration	1	State change	\N	\N	\N	\N	Reactive power mode:\n0 - OFF (unregulated unity PF)\n1 - Reactive output mode\n2 - Power factor mode\n3 - Voltage regulation\n98 - QU mode\n99 - QP mode	Q(U) and Q(P) modes are not used; but are defined
+2350	10	Inv [n] reactive power mode feedback	Analog input	14	32-bit signed integer	\N	enumeration	1	Analog	\N	\N	AI_0012 +/- 1%	Not at Setpoint	Reactive power mode:\n0 - OFF (unregulated unity PF)\n1 - Reactive output mode\n2 - Power factor mode\n3 - Voltage regulation\n98 - QU mode\n99 - QP mode	Q(U) and Q(P) modes are not used; but are defined
+2351	10	Inv [n] reactive power setpoint	Analog input	15	32-bit float	\N	kvar or PU 	1	Analog	\N	\N	-2160;-1;1;2160	5-State	\N	\N
 2352	10	Inv [n] reactive power setpoint feedback	Analog input	16	32-bit float	\N	kvar or PU 	1	Analog	\N	\N	AI_0014 +/- 1%	Not at Setpoint	\N	\N
 2353	10	Inv [n] total DC power	Analog input	17	32-bit float	\N	kW	1	None	\N	\N	\N	\N	\N	\N
 2354	10	Inv [n] energy production today	Analog input	18	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2355	10	Inv [n] energy production yesterday	Analog input	19	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2356	10	Inv [n] total energy production	Analog input	20	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2357	10	Inv [n] total running hours	Analog input	21	32-bit float	\N	hr	1	None	\N	\N	\N	\N	\N	\N
-2358	10	Inv [n] transformer oil temperature	Analog input	22	32-bit float	\N	degC	1	Analog	\N	\N	-40,-25,50,60	5-State	\N	\N
-2359	10	Inv [n] transformer winding temperature	Analog input	23	32-bit float	\N	degC	1	Analog	\N	\N	-40,-25,50,60	5-State	\N	\N
-2360	10	Inv [n] maximum appearant power	Analog input	24	32-bit float	\N	kVA	1	Analog	\N	\N	n/a,3600,3600,n/a	Out of Band	\N	Real time derating
+2358	10	Inv [n] transformer oil temperature	Analog input	22	32-bit float	\N	degC	1	Analog	\N	\N	-40;-25;50;60	5-State	\N	\N
+2359	10	Inv [n] transformer winding temperature	Analog input	23	32-bit float	\N	degC	1	Analog	\N	\N	-40;-25;50;60	5-State	\N	\N
+2360	10	Inv [n] maximum appearant power	Analog input	24	32-bit float	\N	kVA	1	Analog	\N	\N	n/a;3600;3600;n/a	Out of Band	\N	Real time derating
 2361	10	Inv [n] maximum lagging reactive power	Analog input	25	32-bit float	\N	kvar	1	None	\N	\N	\N	\N	\N	\N
 2362	10	Inv [n] maximum leading reactive power	Analog input	26	32-bit float	\N	kvar	1	None	\N	\N	\N	\N	\N	\N
 2363	10	Inv [n] zone monitor status	Analog input	27	32-bit signed integer	\N	enumeration	1	None	\N	\N	\N	\N	Zone Monitor Work State:\n0: Disable\n1: Self-Study\n2: Fault Detection\n	\N
@@ -2727,7 +2727,7 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2389	10	Inv [n] unit 1 energy production yesterday	Analog input	53	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2390	10	Inv [n] unit 1 total energy production	Analog input	54	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2391	10	Inv [n] unit 1 total running hours	Analog input	55	32-bit float	\N	hr	1	None	\N	\N	\N	\N	\N	\N
-2392	10	Inv [n] unit 1 internal module temperature	Analog input	56	32-bit float	\N	degC	1	Analog	\N	\N	-40,-25,50,60	5-State	\N	\N
+2392	10	Inv [n] unit 1 internal module temperature	Analog input	56	32-bit float	\N	degC	1	Analog	\N	\N	-40;-25;50;60	5-State	\N	\N
 2393	10	Inv [n] unit 1 yesterday grid connected minutes	Analog input	57	32-bit float	\N	min	1	None	\N	\N	\N	\N	\N	\N
 2394	10	Inv [n] unit 1 efficiency	Analog input	58	32-bit float	\N	%	1	None	\N	\N	\N	\N	\N	\N
 2395	10	Inv [n] unit 1 positive resitance to ground	Analog input	59	32-bit float	\N	kOhm	1	None	\N	\N	\N	\N	\N	\N
@@ -2784,7 +2784,7 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2446	10	Inv [n] unit 2 energy production yesterday	Analog input	110	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2447	10	Inv [n] unit 2 total energy production	Analog input	111	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2448	10	Inv [n] unit 2 total running hours	Analog input	112	32-bit float	\N	hr	1	None	\N	\N	\N	\N	\N	\N
-2449	10	Inv [n] unit 2 internal module temperature	Analog input	113	32-bit float	\N	degC	1	Analog	\N	\N	-40,-25,50,60	5-State	\N	\N
+2449	10	Inv [n] unit 2 internal module temperature	Analog input	113	32-bit float	\N	degC	1	Analog	\N	\N	-40;-25;50;60	5-State	\N	\N
 2450	10	Inv [n] unit 2 yesterday grid connected minutes	Analog input	114	32-bit float	\N	min	1	None	\N	\N	\N	\N	\N	\N
 2451	10	Inv [n] unit 2 efficiency	Analog input	115	32-bit float	\N	%	1	None	\N	\N	\N	\N	\N	\N
 2452	10	Inv [n] unit 2 positive resitance to ground	Analog input	116	32-bit float	\N	kOhm	1	None	\N	\N	\N	\N	\N	\N
@@ -3240,13 +3240,13 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2901	10	Inv [n] DI21 status	Binary input	24	Boolean	\N	\N	\N	None	On	Off	\N	\N	\N	Need schematic to tell us what function each DI has
 2902	10	Inv [n] manual active power setpoint	Analog output	0	32-bit float	\N	kW	1	\N	\N	\N	\N	\N	\N	\N
 2903	10	Inv [n] manual reactive power setpoint	Analog output	1	32-bit float	\N	kvar or PU 	1	\N	\N	\N	\N	\N	\N	\N
-2904	10	Inv [n] manual reactive power mode	Analog output	2	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	Reactive power mode:\n0 - OFF (unregulated unity PF)\n1 - Reactive output mode\n2 - Power factor mode\n3 - Voltage regulation\n98 - QU mode\n99 - QP mode	Voltage, Q(U) and Q(P) modes are not selectable through the HMI
+2904	10	Inv [n] manual reactive power mode	Analog output	2	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	Reactive power mode:\n0 - OFF (unregulated unity PF)\n1 - Reactive output mode\n2 - Power factor mode\n3 - Voltage regulation\n98 - QU mode\n99 - QP mode	Voltage; Q(U) and Q(P) modes are not selectable through the HMI
 2905	10	Inv [n] manual control	Binary output	0	Boolean	LOn:LOff	\N	\N	None	Manual	Auto	\N	\N	\N	\N
 2907	10	Inv [n] remote emergency stop	Binary output	2	Boolean	LOn:LOff	\N	\N	None	E-stop	Normal	\N	\N	\N	\N
 2908	10	Inv [n] manual DC switch open close	Binary output	3	Boolean	LOn:LOff	\N	\N	None	Close	Open	\N	\N	\N	\N
 2909	11	Inv [n] status	Analog input	0	32-bit float	\N	enumeration	1	None	\N	\N	\N	\N	0 to 4	\N
-2910	11	Inv [n] active power	Analog input	1	32-bit float	\N	kW	1	Analog	\N	\N	n/a,-10,3620,n/a	Out of Band	\N	\N
-2911	11	Inv [n] reactive power	Analog input	2	32-bit float	\N	kvar	1	Analog	\N	\N	n/a,-2180,2180,n/a	Out of Band	\N	\N
+2910	11	Inv [n] active power	Analog input	1	32-bit float	\N	kW	1	Analog	\N	\N	n/a;-10;3620;n/a	Out of Band	\N	\N
+2911	11	Inv [n] reactive power	Analog input	2	32-bit float	\N	kvar	1	Analog	\N	\N	n/a;-2180;2180;n/a	Out of Band	\N	\N
 2912	11	Inv [n] phase A current	Analog input	3	32-bit float	\N	A	1	None	\N	\N	\N	\N	\N	\N
 2913	11	Inv [n] phase B current	Analog input	4	32-bit float	\N	A	1	None	\N	\N	\N	\N	\N	\N
 2914	11	Inv [n] phase C current	Analog input	5	32-bit float	\N	A	1	None	\N	\N	\N	\N	\N	\N
@@ -3255,20 +3255,20 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 2917	11	Inv [n] phase CA voltage	Analog input	8	32-bit float	\N	V	1	None	\N	\N	\N	\N	\N	\N
 2918	11	Inv [n] power factor	Analog input	9	32-bit float	\N	PU	1	None	\N	\N	\N	\N	\N	\N
 2919	11	Inv [n] frequency	Analog input	10	32-bit float	\N	Hz	1	None	\N	\N	\N	\N	\N	\N
-2920	11	Inv [n] active power setpoint	Analog input	11	32-bit float	\N	kW	1	Analog	\N	\N	n/a,0,3600,n/a	Out of Band	\N	\N
+2920	11	Inv [n] active power setpoint	Analog input	11	32-bit float	\N	kW	1	Analog	\N	\N	n/a;0;3600;n/a	Out of Band	\N	\N
 2921	11	Inv [n] active power setpoint feedback	Analog input	12	32-bit float	\N	kW	1	Analog	\N	\N	AI_0010 +/- 1%	Not at Setpoint	\N	\N
-2922	11	Inv [n] reactive power mode	Analog input	13	32-bit signed integer	\N	enumeration	1	State change	\N	\N	\N	\N	0 to 3, 98,99	Q(U) and Q(P) modes are not used, but are defined
-2923	11	Inv [n] reactive power mode feedback	Analog input	14	32-bit signed integer	\N	enumeration	1	Analog	\N	\N	AI_0012 +/- 1%	Not at Setpoint	0 to 3, 98,99	Q(U) and Q(P) modes are not used, but are defined
-2924	11	Inv [n] reactive power setpoint	Analog input	15	32-bit float	\N	kvar or PU 	1	Analog	\N	\N	-2160,-1,1,2160	5-State	\N	\N
+2922	11	Inv [n] reactive power mode	Analog input	13	32-bit signed integer	\N	enumeration	1	State change	\N	\N	\N	\N	0 to 3; 98;99	Q(U) and Q(P) modes are not used; but are defined
+2923	11	Inv [n] reactive power mode feedback	Analog input	14	32-bit signed integer	\N	enumeration	1	Analog	\N	\N	AI_0012 +/- 1%	Not at Setpoint	0 to 3; 98;99	Q(U) and Q(P) modes are not used; but are defined
+2924	11	Inv [n] reactive power setpoint	Analog input	15	32-bit float	\N	kvar or PU 	1	Analog	\N	\N	-2160;-1;1;2160	5-State	\N	\N
 2925	11	Inv [n] reactive power setpoint feedback	Analog input	16	32-bit float	\N	kvar or PU 	1	Analog	\N	\N	AI_0014 +/- 1%	Not at Setpoint	\N	\N
 2926	11	Inv [n] total DC power	Analog input	17	32-bit float	\N	kW	1	None	\N	\N	\N	\N	\N	\N
 2927	11	Inv [n] energy production today	Analog input	18	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2928	11	Inv [n] energy production yesterday	Analog input	19	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2929	11	Inv [n] total energy production	Analog input	20	32-bit float	\N	kWh	1	None	\N	\N	\N	\N	\N	\N
 2930	11	Inv [n] total running hours	Analog input	21	32-bit float	\N	hr	1	None	\N	\N	\N	\N	\N	\N
-2931	11	Inv [n] transformer oil temperature	Analog input	22	32-bit float	\N	degC	1	Analog	\N	\N	-40,-25,50,60	5-State	\N	\N
-2932	11	Inv [n] transformer winding temperature	Analog input	23	32-bit float	\N	degC	1	Analog	\N	\N	-40,-25,50,60	5-State	\N	\N
-2933	11	Inv [n] maximum appearant power	Analog input	24	32-bit float	\N	kVA	1	Analog	\N	\N	n/a,3600,3600,n/a	Out of Band	\N	Real time derating
+2931	11	Inv [n] transformer oil temperature	Analog input	22	32-bit float	\N	degC	1	Analog	\N	\N	-40;-25;50;60	5-State	\N	\N
+2932	11	Inv [n] transformer winding temperature	Analog input	23	32-bit float	\N	degC	1	Analog	\N	\N	-40;-25;50;60	5-State	\N	\N
+2933	11	Inv [n] maximum appearant power	Analog input	24	32-bit float	\N	kVA	1	Analog	\N	\N	n/a;3600;3600;n/a	Out of Band	\N	Real time derating
 2934	11	Inv [n] maximum lagging reactive power	Analog input	25	32-bit float	\N	kvar	1	None	\N	\N	\N	\N	\N	\N
 2935	11	Inv [n] maximum leading reactive power	Analog input	26	32-bit float	\N	kvar	1	None	\N	\N	\N	\N	\N	\N
 2936	11	Inv [n] zone monitor status	Analog input	27	32-bit signed integer	\N	enumeration	1	None	\N	\N	\N	\N	0 to 2	\N
@@ -4053,297 +4053,297 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 3715	11	Inv [n] manual control status	Binary input	3	Boolean	\N	\N	\N	On (1)	Manual	Auto	\N	\N	\N	\N
 3716	11	Inv [n] manual active power setpoint	Analog output	0	32-bit float	\N	kW	1	\N	\N	\N	\N	\N	\N	\N
 3717	11	Inv [n] manual reactive power setpoint	Analog output	1	32-bit float	\N	kvar or PU 	1	\N	\N	\N	\N	\N	\N	\N
-3718	11	Inv [n] manual reactive power mode	Analog output	2	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	0 to 2	Voltage, Q(U) and Q(P) modes are not selectable through the HMI
+3718	11	Inv [n] manual reactive power mode	Analog output	2	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	0 to 2	Voltage; Q(U) and Q(P) modes are not selectable through the HMI
 3719	11	Inv [n] manual control	Binary output	0	Boolean	\N	\N	\N	None	Manual	Auto	\N	\N	\N	\N
 3720	11	Inv [n] manual start stop	Binary output	1	Boolean	\N	\N	\N	None	Start	Stop	\N	\N	\N	\N
 3721	11	Inv [n] remote emergency stop	Binary output	2	Boolean	\N	\N	\N	None	E-stop	Normal	\N	\N	\N	\N
 3722	11	Inv [n] manual DC switch open close	Binary output	3	Boolean	\N	\N	\N	None	Close	Open	\N	\N	\N	\N
-3723	12	Env [n] solar zenith angle	Analog input	0	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	\N
-3724	12	Env [n] solar elevation angle	Analog input	1	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	\N
-3725	12	Env [n] solar azimuth angle	Analog input	2	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	\N
-3726	12	Env [n] POA irradiance raw	Analog input	3	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	\N
-3727	12	Env [n] POA irradiance temperature compensated	Analog input	4	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	\N
-3728	12	Env [n] POA temperature	Analog input	5	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	\N
-3729	12	Env [n] POA tilt angle	Analog input	6	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	\N
-3730	12	Env [n] GHI irradiance raw	Analog input	7	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	\N
-3731	12	Env [n] GHI irradiance temperature compensated	Analog input	8	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	\N
-3732	12	Env [n] GHI temperature	Analog input	9	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	\N
-3733	12	Env [n] ambient temp	Analog input	10	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	\N
-3734	12	Env [n] dew point	Analog input	11	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	\N
-3735	12	Env [n] relative humidity	Analog input	12	32-bit float	\N	%	1	\N	\N	\N	\N	\N	┬á	\N
-3736	12	Env [n] wind speed	Analog input	13	32-bit float	\N	m/s	1	\N	\N	\N	\N	\N	┬á	\N
-3737	12	Env [n] wind speed max	Analog input	14	32-bit float	\N	m/s	1	\N	\N	\N	\N	\N	┬á	\N
-3738	12	Env [n] wind direction	Analog input	15	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	\N
-3739	12	Env [n] wind quality	Analog input	16	32-bit float	\N	%	1	\N	\N	\N	\N	\N	┬á	\N
-3740	12	Env [n] barometric pressure local	Analog input	17	32-bit float	\N	mbar	1	\N	\N	\N	\N	\N	┬á	\N
-3741	12	Env [n] barometric pressure sea level	Analog input	18	32-bit float	\N	mbar	1	\N	\N	\N	\N	\N	┬á	\N
-3742	12	Env [n] wind sensor compass	Analog input	19	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	\N
-3743	12	Env [n] wind chill	Analog input	20	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	\N
-3744	12	Env [n] heat index	Analog input	21	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	\N
-3745	12	Env [n] rainfall total monthly	Analog input	22	32-bit float	\N	mm	1	\N	\N	\N	\N	\N	┬á	┬á
-3746	12	Env [n] rainfall instantaneous	Analog input	23	32-bit float	\N	mm	1	\N	\N	\N	\N	\N	┬á	┬á
-3747	12	Env [n] rainfall intensity instantaneous	Analog input	24	32-bit float	\N	mm/hr	1	\N	\N	\N	\N	\N	┬á	┬á
-3748	12	Env [n] rainfall total today	Analog input	25	32-bit float	\N	mm	1	\N	\N	\N	\N	\N	┬á	┬á
-3749	12	Env [n] BOM temperature 1	Analog input	26	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3750	12	Env [n] BOM temperature 2	Analog input	27	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3751	12	Env [n] BOM temperature 3	Analog input	28	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3752	12	Env [n] data logger scan count	Analog input	29	32-bit float	\N	count	1	\N	\N	\N	\N	\N	┬á	┬á
-3753	12	Env [n] data logger skipped scans	Analog input	30	32-bit float	\N	count	1	\N	\N	\N	\N	\N	┬á	┬á
-3754	12	Env [n] data logger power supply voltage	Analog input	31	32-bit float	\N	V	1	\N	\N	\N	\N	\N	┬á	┬á
-3755	12	Env [n] data logger cabinet temperature	Analog input	32	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3756	12	Env [n] data logger battery backup voltage	Analog input	33	32-bit float	\N	V	1	\N	\N	\N	\N	\N	┬á	┬á
-3757	12	Env [n] data logger battery backup charging source	Analog input	34	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	0 thru 2	0 = None, 1 = Solar, 2 = AC Power
-3758	12	Env [n] reflected POA irradiance raw	Analog input	35	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3759	12	Env [n] reflected POA irradiance temperature compensated	Analog input	36	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3760	12	Env [n] reflected POA temperature	Analog input	37	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3761	12	Env [n] reflected insolation	Analog input	38	32-bit float	\N	Wh/m2	1	\N	\N	\N	\N	\N	┬á	\N
-3762	12	Env [n] reflected POA tilt angle	Analog input	39	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	┬á
-3763	12	Env [n] spare analog 01	Analog input	40	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3764	12	Env [n] spare analog 02	Analog input	41	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3765	12	Env [n] spare analog 03	Analog input	42	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	\N
-3766	12	Env [n] spare analog 04	Analog input	43	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3767	12	Env [n] spare analog 05	Analog input	44	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3768	12	Env [p] POA irradiance raw	Analog input	45	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3769	12	Env [p] POA irradiance temperature compensated	Analog input	46	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3770	12	Env [p] POA temperature	Analog input	47	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3771	12	Env [p] POA tilt angle	Analog input	48	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	┬á	┬á
-3772	12	Env [p] spare analog 01	Analog input	49	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3773	12	Env [p] spare analog 02	Analog input	50	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3774	12	Env [s] soiling ratio raw	Analog input	51	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3775	12	Env [s] soiling ratio irradiance weighted	Analog input	52	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3776	12	Env [s] soiling loss factor raw	Analog input	53	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3777	12	Env [s] soiling loss factor irradiance weighted	Analog input	54	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3778	12	Env [s] clean panel short circuit current	Analog input	55	32-bit float	\N	A	1	\N	\N	\N	\N	\N	┬á	┬á
-3779	12	Env [s] soiled panel short circuit current	Analog input	56	32-bit float	\N	A	1	\N	\N	\N	\N	\N	┬á	┬á
-3780	12	Env [s] short circuit current normalization ratio	Analog input	57	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	ISC clean / ISC soiled at time of normalization
-3781	12	Env [s] clean panel effective irradiance	Analog input	58	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3782	12	Env [s] soiled panel effective irradiance	Analog input	59	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3783	12	Env [s] clean panel BOM temperature	Analog input	60	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3784	12	Env [s] soiled panel BOM temperature	Analog input	61	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3785	12	Env [s] soiling quality	Analog input	62	32-bit float	\N	%	1	\N	\N	\N	\N	\N	┬á	Percent of possible samples that were actually sampled
-3786	12	Env [s] number of days since last clear sky	Analog input	63	32-bit float	\N	days	1	\N	\N	\N	\N	\N	┬á	┬á
-3787	12	Env [s] data logger scan count	Analog input	64	32-bit float	\N	count	1	\N	\N	\N	\N	\N	┬á	┬á
-3788	12	Env [s] data logger skipped scans	Analog input	65	32-bit float	\N	count	1	\N	\N	\N	\N	\N	┬á	┬á
-3789	12	Env [s] data logger power supply voltage	Analog input	66	32-bit float	\N	V	1	\N	\N	\N	\N	\N	┬á	┬á
-3790	12	Env [s] data logger cabinet temperature	Analog input	67	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3791	12	Env [s] data logger battery backup voltage	Analog input	68	32-bit float	\N	V	1	\N	\N	\N	\N	\N	┬á	┬á
-3792	12	Env [s] spare analog 01	Analog input	69	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3793	12	Env [s] spare analog 02	Analog input	70	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3794	12	Env [s] spare analog 03	Analog input	71	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3795	12	Env [s] spare analog 04	Analog input	72	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3796	12	Env [s] spare analog 05	Analog input	73	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3797	12	Env [s] spare analog 06	Analog input	74	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3798	12	Env [a] instantaneous albedo raw	Analog input	75	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3799	12	Env [a] instantaneous albedo temperature compensated	Analog input	76	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3800	12	Env [a] daily average albedo raw	Analog input	77	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3801	12	Env [a] daily average albedo temperature compensated	Analog input	78	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3802	12	Env [a] GHI irradiance raw	Analog input	79	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3803	12	Env [a] GHI irradiance temperature compensated	Analog input	80	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3804	12	Env [a] GHI temperature	Analog input	81	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3805	12	Env [a] RHI irradiance raw	Analog input	82	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3806	12	Env [a] RHI irradiance temperature compensated	Analog input	83	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	┬á	┬á
-3807	12	Env [a] RHI temperature	Analog input	84	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3808	12	Env [a] data logger scan count	Analog input	85	32-bit float	\N	count	1	\N	\N	\N	\N	\N	┬á	┬á
-3809	12	Env [a] data logger skipped scans	Analog input	86	32-bit float	\N	count	1	\N	\N	\N	\N	\N	┬á	┬á
-3810	12	Env [a] data logger power supply voltage	Analog input	87	32-bit float	\N	V	1	\N	\N	\N	\N	\N	┬á	┬á
-3811	12	Env [a] data logger cabinet temperature	Analog input	88	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	┬á	┬á
-3812	12	Env [a] data logger battery backup voltage	Analog input	89	32-bit float	\N	V	1	\N	\N	\N	\N	\N	┬á	┬á
-3813	12	Env [a] spare analog 01	Analog input	90	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3814	12	Env [a] spare analog 02	Analog input	91	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3815	12	Env [a] spare analog 03	Analog input	92	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3816	12	Env [a] spare analog 04	Analog input	93	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3817	12	Env [a] spare analog 05	Analog input	94	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	┬á
-3818	12	Env [a] spare analog 06	Analog input	95	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	┬á	\N
-3819	12	Env [n] data logger alarms register	Counter	0	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3820	12	Env [n] data logger watchdog error	Counter	0	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3821	12	Env [n] data logger skipped main scan	Counter	0	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3822	12	Env [n] data logger skipped slow scan	Counter	0	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3823	12	Env [n] data logger program variable out of bounds	Counter	0	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3824	12	Env [n] data logger low 12V	Counter	0	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3825	12	Env [n] data logger low 5V	Counter	0	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3826	12	Env [n] data logger lithium battery error	Counter	0	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3827	12	Env [n] data logger lithium battery low	Counter	0	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3828	12	Env [n] data logger lithium battery critical	Counter	0	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3829	12	Env [n] data logger voltage error	Counter	0	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3830	12	Env [n] data logger low voltage warning	Counter	0	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3831	12	Env [n] data logger low voltage	Counter	0	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3832	12	Env [n] data logger over voltage	Counter	0	32-bit bitfield	19	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3833	12	Env [n] data logger temperature error	Counter	0	32-bit bitfield	24	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3834	12	Env [n] data logger temperature below operating range	Counter	0	32-bit bitfield	25	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3835	12	Env [n] data logger temperature above operating range	Counter	0	32-bit bitfield	26	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3836	12	Env [n] battery alarms register	Counter	1	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3837	12	Env [n] check battery	Counter	1	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3838	12	Env [n] battery voltage error	Counter	1	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3839	12	Env [n] low battery voltage warning	Counter	1	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3840	12	Env [n] low battery voltage critical	Counter	1	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3841	12	Env [n] low battery voltage deep discharge	Counter	1	32-bit bitfield	11	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3842	12	Env [n] battery current error	Counter	1	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3843	12	Env [n] excessive battery current warning	Counter	1	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3844	12	Env [n] excessive battery current critical	Counter	1	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3845	12	Env [n] charging alarms register	Counter	2	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3846	12	Env [n] input voltage error	Counter	2	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3847	12	Env [n] rpu enabled	Counter	2	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3848	12	Env [n] input current error	Counter	2	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3849	12	Env [n] excessive input current	Counter	2	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3850	12	Env [n] load current error	Counter	2	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3851	12	Env [n] excessive load current warning	Counter	2	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3852	12	Env [n] excessive load current	Counter	2	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3853	12	Env [n] GHI alarms register	Counter	3	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3854	12	Env [n] GHI irradiance error	Counter	3	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3855	12	Env [n] GHI irradiance negative	Counter	3	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3856	12	Env [n] GHI irradiance above solar constant	Counter	3	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3857	12	Env [n] GHI temperature corrected irradiance error	Counter	3	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3858	12	Env [n] GHI temperature corrected irradiance negative	Counter	3	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3859	12	Env [n] GHI temperature corrected irradiance above solar constant	Counter	3	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3860	12	Env [n] GHI case temperature error	Counter	3	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3861	12	Env [n] GHI case temperature below operating range	Counter	3	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3862	12	Env [n] GHI case temperature above operating range	Counter	3	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3863	12	Env [n] GHI irradiance insufficient activity	Counter	3	32-bit bitfield	31	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3864	12	Env [n] POA alarms register	Counter	4	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3865	12	Env [n] POA irradiance error	Counter	3	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3866	12	Env [n] POA irradiance negative	Counter	3	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3867	12	Env [n] POA irradiance above solar constant	Counter	3	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3868	12	Env [n] POA temperature corrected irradiance error	Counter	3	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3869	12	Env [n] POA temperature corrected irradiance negative	Counter	3	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3870	12	Env [n] POA temperature corrected irradiance above solar constant	Counter	3	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3871	12	Env [n] POA case temperature error	Counter	3	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3872	12	Env [n] POA case temperature below operating range	Counter	3	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3873	12	Env [n] POA case temperature above operating range	Counter	3	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3874	12	Env [n] POA irradiance insufficient activity	Counter	3	32-bit bitfield	31	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3875	12	Env [n] multifunction alarms register	Counter	5	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3876	12	Env [n] ambient temperature error	Counter	4	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3877	12	Env [n] ambient temperature below operating range	Counter	4	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3878	12	Env [n] ambient temperature above operating range	Counter	4	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3879	12	Env [n] dew point error	Counter	4	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3880	12	Env [n] dew point above ambient temperature	Counter	4	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3881	12	Env [n] condensation warning	Counter	4	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3882	12	Env [n] relative humidity error	Counter	4	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3883	12	Env [n] relative humidity below operating range	Counter	4	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3884	12	Env [n] relative humidity above operating range	Counter	4	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3885	12	Env [n] absolute barometric pressure error	Counter	4	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3886	12	Env [n] absolute barometric pressure below operating range	Counter	4	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3887	12	Env [n] absolute barometric pressure above operating range	Counter	4	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3888	12	Env [n] sea level barometric pressure error	Counter	4	32-bit bitfield	24	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3889	12	Env [n] sea level barometric pressure below operating range	Counter	4	32-bit bitfield	25	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4067	13	Cap bank manual close open command	Binary output	3	Boolean	LOn:LOff	\N	\N	\N	Close	Open	\N	\N	┬á	┬á
-3890	12	Env [n] sea level barometric pressure above operating range	Counter	4	32-bit bitfield	26	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3891	12	Env [n] wind alarms register	Counter	6	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3892	12	Env [n] wind speed error	Counter	5	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3893	12	Env [n] wind speed below operating range	Counter	5	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3894	12	Env [n] wind speed above operating range	Counter	5	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3895	12	Env [n] wind speed unable to execute measurement due to ambient conditions	Counter	5	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3896	12	Env [n] wind speed quality warning	Counter	5	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3897	12	Env [n] wind speed quality error	Counter	5	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3898	12	Env [n] wind speed max error	Counter	5	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3899	12	Env [n] wind speed max below operating range	Counter	5	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3900	12	Env [n] wind speed max above operating range	Counter	5	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3901	12	Env [n] wind direction error	Counter	5	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3902	12	Env [n] wind direction below operating range	Counter	5	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3903	12	Env [n] wind direction above operating range	Counter	5	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3904	12	Env [n] compass error	Counter	5	32-bit bitfield	24	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3905	12	Env [n] compass below operating range	Counter	5	32-bit bitfield	25	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3906	12	Env [n] compass above operating range	Counter	5	32-bit bitfield	26	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3907	12	Env [n] wind speed insufficient activity	Counter	5	32-bit bitfield	31	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3908	12	Env [n] rain alarms regsiter	Counter	7	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3909	12	Env [n] rain total error	Counter	6	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3910	12	Env [n] rain total negative	Counter	6	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3911	12	Env [n] rain total above operating range	Counter	6	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3912	12	Env [n] rain intensity error	Counter	6	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3913	12	Env [n] rain intensity negative	Counter	6	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3914	12	Env [n] rain intensity above operating range	Counter	6	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3915	12	Env [n] rain today error	Counter	6	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3916	12	Env [n] rain today is negative	Counter	6	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3917	12	Env [n] rain today above operating range	Counter	6	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3918	12	Env [n] BOM alarm register	Counter	8	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	┬á	┬á
-3919	12	Env [n] BOM 1 temperature error	Counter	7	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3920	12	Env [n] BOM 1 temperature below operating range	Counter	7	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3921	12	Env [n] BOM 1 temperature above operating range	Counter	7	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3922	12	Env [n] BOM 2 temperature error	Counter	7	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3923	12	Env [n] BOM 2 temperature below operating range	Counter	7	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3924	12	Env [n] BOM 2 temperature above operating range	Counter	7	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3925	12	Env [n] BOM 3 temperature error	Counter	7	32-bit bitfield	6	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3926	12	Env [n] BOM 3 temperature below operating range	Counter	7	32-bit bitfield	7	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3927	12	Env [n] BOM 3 temperature above operating range	Counter	7	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3928	12	Env [n] summary alarm	Binary input	0	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3929	12	Env [n] maintenance button pressed	Binary input	1	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3930	12	Env [n] pyranometer heat status	Binary input	2	Boolean	\N	\N	\N	None	On	Off	\N	\N	┬á	┬á
-3931	12	Env [n] communication failure alarm	Binary input	3	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3932	12	Env [p] POA irradiance error	Binary input	4	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3933	12	Env [p] POA irradiance negative	Binary input	5	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3934	12	Env [p] POA irradiance above solar constant	Binary input	6	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3935	12	Env [p] POA temperature corrected irradiance error	Binary input	7	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3936	12	Env [p] POA temperature corrected irradiance negative	Binary input	8	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3937	12	Env [p] POA temperature corrected irradiance above solar constant	Binary input	9	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3938	12	Env [p] POA case temperature error	Binary input	10	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3939	12	Env [p] POA case temperature below operating range	Binary input	11	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3940	12	Env [p] POA case temperature above operating range	Binary input	12	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3941	12	Env [p] POA irradiance insufficient activity	Binary input	13	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3942	12	Env [p] communication failure alarm	Binary input	14	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3943	12	Env [s] soiling ratio out of range	Binary input	15	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3944	12	Env [s] heavy soiling alarm	Binary input	16	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	Soiling ratio below 0.93
-3945	12	Env [s] extremely heavy soiling alarm	Binary input	17	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	Soiling ratio below 0.87
-3946	12	Env [s] soiling ratio insufficient activity	Binary input	18	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3947	12	Env [s] clean panel BOM temperature error	Binary input	19	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3948	12	Env [s] clean panel BOM temperature below operating range	Binary input	20	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3949	12	Env [s] clean panel BOM temperature above operating range	Binary input	21	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3950	12	Env [s] soiled panel BOM temperature error	Binary input	22	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3951	12	Env [s] soiled panel BOM temperature below operating range	Binary input	23	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3952	12	Env [s] soiled panel BOM temperature above operating range	Binary input	24	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3953	12	Env [s] BOM temperature difference too great	Binary input	25	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3954	12	Env [s] clean panel ISC out of range	Binary input	26	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3955	12	Env [s] soiled panel ISC out of range	Binary input	27	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3956	12	Env [s] ISC difference too great	Binary input	28	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3957	12	Env [s] data logger watchdog error	Binary input	29	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3958	12	Env [s] data logger skipped main scan	Binary input	30	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3959	12	Env [s] data logger skipped slow scan	Binary input	31	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3960	12	Env [s] data logger program variable out of bounds	Binary input	32	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3961	12	Env [s] data logger low 12V	Binary input	33	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3962	12	Env [s] data logger low 5V	Binary input	34	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3963	12	Env [s] data logger lithium battery error	Binary input	35	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3964	12	Env [s] data logger lithium battery low	Binary input	36	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3965	12	Env [s] data logger lithium battery critical	Binary input	37	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3966	12	Env [s] data logger voltage error	Binary input	38	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3967	12	Env [s] data logger low voltage warning	Binary input	39	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3968	12	Env [s] data logger low voltage	Binary input	40	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3969	12	Env [s] data logger over voltage	Binary input	41	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3970	12	Env [s] data logger temperature error	Binary input	42	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3971	12	Env [s] data logger temperature below operating range	Binary input	43	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3972	12	Env [s] data logger temperature above operating range	Binary input	44	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3973	12	Env [s] communication failure alarm	Binary input	45	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3974	12	Env [a] GHI irradiance error	Binary input	46	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3975	12	Env [a] GHI irradiance negative	Binary input	47	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3976	12	Env [a] GHI irradiance above solar constant	Binary input	48	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3977	12	Env [a] GHI irradiance insufficient activity	Binary input	49	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3978	12	Env [a] RHI irradiance error	Binary input	50	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3979	12	Env [a] RHI irradiance negative	Binary input	51	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3980	12	Env [a] RHI irradiance above solar constant	Binary input	52	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3981	12	Env [a] RHI irradiance insufficient activity	Binary input	53	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3982	12	Env [a] GHI case temperature error	Binary input	54	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3983	12	Env [a] GHI case temperature below operating range	Binary input	55	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3984	12	Env [a] GHI case temperature above operating range	Binary input	56	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3985	12	Env [a] RHI case temperature error	Binary input	57	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3986	12	Env [a] RHI case temperature below operating range	Binary input	58	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3987	12	Env [a] RHI case temperature above operating range	Binary input	59	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3988	12	Env [a] albedo out of range	Binary input	60	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3989	12	Env [a] data logger watchdog error	Binary input	61	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3990	12	Env [a] data logger skipped main scan	Binary input	62	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3991	12	Env [a] data logger skipped slow scan	Binary input	63	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3992	12	Env [a] data logger program variable out of bounds	Binary input	64	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3993	12	Env [a] data logger low 12V	Binary input	65	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3994	12	Env [a] data logger low 5V	Binary input	66	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3995	12	Env [a] data logger lithium battery error	Binary input	67	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3996	12	Env [a] data logger lithium battery low	Binary input	68	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3997	12	Env [a] data logger lithium battery critical	Binary input	69	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3998	12	Env [a] data logger voltage error	Binary input	70	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-3999	12	Env [a] data logger low voltage warning	Binary input	71	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4000	12	Env [a] data logger low voltage	Binary input	72	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4001	12	Env [a] data logger over voltage	Binary input	73	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4002	12	Env [a] data logger temperature error	Binary input	74	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4003	12	Env [a] data logger temperature below operating range	Binary input	75	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4004	12	Env [a] data logger temperature above operating range	Binary input	76	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4005	12	Env [a] communication failure alarm	Binary input	77	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4068	13	Cap bank automatic control enable disable	Binary output	4	Boolean	LOn:LOff	\N	\N	\N	Auto	Manual	\N	\N	┬á	┬á
-4006	13	Plant status	Analog input	0	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Plant Operation Status:\n ESTOP  0,\n STOPPED  1,\n STANDBY  2,\n WARMUP  3,\n RUN_NIGHT_SVC  4,\n RUN_OPEN_LOOP  5,\n RUN_OL_RAMP  6,\n RUN_CLOSED_LOOP  7,\n RUN_CL_RAMP  8,\n SHUTTING_DOWN  9	\N
+3723	12	Env [n] solar zenith angle	Analog input	0	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3724	12	Env [n] solar elevation angle	Analog input	1	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3725	12	Env [n] solar azimuth angle	Analog input	2	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3726	12	Env [n] POA irradiance raw	Analog input	3	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3727	12	Env [n] POA irradiance temperature compensated	Analog input	4	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3728	12	Env [n] POA temperature	Analog input	5	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3729	12	Env [n] POA tilt angle	Analog input	6	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3730	12	Env [n] GHI irradiance raw	Analog input	7	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3731	12	Env [n] GHI irradiance temperature compensated	Analog input	8	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3732	12	Env [n] GHI temperature	Analog input	9	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3733	12	Env [n] ambient temp	Analog input	10	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3734	12	Env [n] dew point	Analog input	11	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3735	12	Env [n] relative humidity	Analog input	12	32-bit float	\N	%	1	\N	\N	\N	\N	\N	\N	\N
+3736	12	Env [n] wind speed	Analog input	13	32-bit float	\N	m/s	1	\N	\N	\N	\N	\N	\N	\N
+3737	12	Env [n] wind speed max	Analog input	14	32-bit float	\N	m/s	1	\N	\N	\N	\N	\N	\N	\N
+3738	12	Env [n] wind direction	Analog input	15	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3739	12	Env [n] wind quality	Analog input	16	32-bit float	\N	%	1	\N	\N	\N	\N	\N	\N	\N
+3740	12	Env [n] barometric pressure local	Analog input	17	32-bit float	\N	mbar	1	\N	\N	\N	\N	\N	\N	\N
+3741	12	Env [n] barometric pressure sea level	Analog input	18	32-bit float	\N	mbar	1	\N	\N	\N	\N	\N	\N	\N
+3742	12	Env [n] wind sensor compass	Analog input	19	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3743	12	Env [n] wind chill	Analog input	20	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3744	12	Env [n] heat index	Analog input	21	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3745	12	Env [n] rainfall total monthly	Analog input	22	32-bit float	\N	mm	1	\N	\N	\N	\N	\N	\N	\N
+3746	12	Env [n] rainfall instantaneous	Analog input	23	32-bit float	\N	mm	1	\N	\N	\N	\N	\N	\N	\N
+3747	12	Env [n] rainfall intensity instantaneous	Analog input	24	32-bit float	\N	mm/hr	1	\N	\N	\N	\N	\N	\N	\N
+3748	12	Env [n] rainfall total today	Analog input	25	32-bit float	\N	mm	1	\N	\N	\N	\N	\N	\N	\N
+3749	12	Env [n] BOM temperature 1	Analog input	26	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3750	12	Env [n] BOM temperature 2	Analog input	27	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3751	12	Env [n] BOM temperature 3	Analog input	28	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3752	12	Env [n] data logger scan count	Analog input	29	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
+3753	12	Env [n] data logger skipped scans	Analog input	30	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
+3754	12	Env [n] data logger power supply voltage	Analog input	31	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
+3755	12	Env [n] data logger cabinet temperature	Analog input	32	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3756	12	Env [n] data logger battery backup voltage	Analog input	33	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
+3757	12	Env [n] data logger battery backup charging source	Analog input	34	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	0 thru 2	0 = None; 1 = Solar; 2 = AC Power
+3758	12	Env [n] reflected POA irradiance raw	Analog input	35	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3759	12	Env [n] reflected POA irradiance temperature compensated	Analog input	36	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3760	12	Env [n] reflected POA temperature	Analog input	37	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3761	12	Env [n] reflected insolation	Analog input	38	32-bit float	\N	Wh/m2	1	\N	\N	\N	\N	\N	\N	\N
+3762	12	Env [n] reflected POA tilt angle	Analog input	39	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3763	12	Env [n] spare analog 01	Analog input	40	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3764	12	Env [n] spare analog 02	Analog input	41	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3765	12	Env [n] spare analog 03	Analog input	42	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3766	12	Env [n] spare analog 04	Analog input	43	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3767	12	Env [n] spare analog 05	Analog input	44	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3768	12	Env [p] POA irradiance raw	Analog input	45	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3769	12	Env [p] POA irradiance temperature compensated	Analog input	46	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3770	12	Env [p] POA temperature	Analog input	47	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3771	12	Env [p] POA tilt angle	Analog input	48	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+3772	12	Env [p] spare analog 01	Analog input	49	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3773	12	Env [p] spare analog 02	Analog input	50	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3774	12	Env [s] soiling ratio raw	Analog input	51	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3775	12	Env [s] soiling ratio irradiance weighted	Analog input	52	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3776	12	Env [s] soiling loss factor raw	Analog input	53	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3777	12	Env [s] soiling loss factor irradiance weighted	Analog input	54	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3778	12	Env [s] clean panel short circuit current	Analog input	55	32-bit float	\N	A	1	\N	\N	\N	\N	\N	\N	\N
+3779	12	Env [s] soiled panel short circuit current	Analog input	56	32-bit float	\N	A	1	\N	\N	\N	\N	\N	\N	\N
+3780	12	Env [s] short circuit current normalization ratio	Analog input	57	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	ISC clean / ISC soiled at time of normalization
+3781	12	Env [s] clean panel effective irradiance	Analog input	58	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3782	12	Env [s] soiled panel effective irradiance	Analog input	59	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3783	12	Env [s] clean panel BOM temperature	Analog input	60	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3784	12	Env [s] soiled panel BOM temperature	Analog input	61	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3785	12	Env [s] soiling quality	Analog input	62	32-bit float	\N	%	1	\N	\N	\N	\N	\N	\N	Percent of possible samples that were actually sampled
+3786	12	Env [s] number of days since last clear sky	Analog input	63	32-bit float	\N	days	1	\N	\N	\N	\N	\N	\N	\N
+3787	12	Env [s] data logger scan count	Analog input	64	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
+3788	12	Env [s] data logger skipped scans	Analog input	65	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
+3789	12	Env [s] data logger power supply voltage	Analog input	66	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
+3790	12	Env [s] data logger cabinet temperature	Analog input	67	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3791	12	Env [s] data logger battery backup voltage	Analog input	68	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
+3792	12	Env [s] spare analog 01	Analog input	69	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3793	12	Env [s] spare analog 02	Analog input	70	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3794	12	Env [s] spare analog 03	Analog input	71	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3795	12	Env [s] spare analog 04	Analog input	72	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3796	12	Env [s] spare analog 05	Analog input	73	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3797	12	Env [s] spare analog 06	Analog input	74	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3798	12	Env [a] instantaneous albedo raw	Analog input	75	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3799	12	Env [a] instantaneous albedo temperature compensated	Analog input	76	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3800	12	Env [a] daily average albedo raw	Analog input	77	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3801	12	Env [a] daily average albedo temperature compensated	Analog input	78	32-bit float	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3802	12	Env [a] GHI irradiance raw	Analog input	79	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3803	12	Env [a] GHI irradiance temperature compensated	Analog input	80	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3804	12	Env [a] GHI temperature	Analog input	81	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3805	12	Env [a] RHI irradiance raw	Analog input	82	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3806	12	Env [a] RHI irradiance temperature compensated	Analog input	83	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+3807	12	Env [a] RHI temperature	Analog input	84	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3808	12	Env [a] data logger scan count	Analog input	85	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
+3809	12	Env [a] data logger skipped scans	Analog input	86	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
+3810	12	Env [a] data logger power supply voltage	Analog input	87	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
+3811	12	Env [a] data logger cabinet temperature	Analog input	88	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+3812	12	Env [a] data logger battery backup voltage	Analog input	89	32-bit float	\N	V	1	\N	\N	\N	\N	\N	\N	\N
+3813	12	Env [a] spare analog 01	Analog input	90	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3814	12	Env [a] spare analog 02	Analog input	91	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3815	12	Env [a] spare analog 03	Analog input	92	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3816	12	Env [a] spare analog 04	Analog input	93	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3817	12	Env [a] spare analog 05	Analog input	94	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3818	12	Env [a] spare analog 06	Analog input	95	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3819	12	Env [n] data logger alarms register	Counter	0	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3820	12	Env [n] data logger watchdog error	Counter	0	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3821	12	Env [n] data logger skipped main scan	Counter	0	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3822	12	Env [n] data logger skipped slow scan	Counter	0	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3823	12	Env [n] data logger program variable out of bounds	Counter	0	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3824	12	Env [n] data logger low 12V	Counter	0	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3825	12	Env [n] data logger low 5V	Counter	0	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3826	12	Env [n] data logger lithium battery error	Counter	0	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3827	12	Env [n] data logger lithium battery low	Counter	0	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3828	12	Env [n] data logger lithium battery critical	Counter	0	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3829	12	Env [n] data logger voltage error	Counter	0	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3830	12	Env [n] data logger low voltage warning	Counter	0	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3831	12	Env [n] data logger low voltage	Counter	0	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3832	12	Env [n] data logger over voltage	Counter	0	32-bit bitfield	19	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3833	12	Env [n] data logger temperature error	Counter	0	32-bit bitfield	24	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3834	12	Env [n] data logger temperature below operating range	Counter	0	32-bit bitfield	25	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3835	12	Env [n] data logger temperature above operating range	Counter	0	32-bit bitfield	26	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3836	12	Env [n] battery alarms register	Counter	1	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3837	12	Env [n] check battery	Counter	1	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3838	12	Env [n] battery voltage error	Counter	1	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3839	12	Env [n] low battery voltage warning	Counter	1	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3840	12	Env [n] low battery voltage critical	Counter	1	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3841	12	Env [n] low battery voltage deep discharge	Counter	1	32-bit bitfield	11	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3842	12	Env [n] battery current error	Counter	1	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3843	12	Env [n] excessive battery current warning	Counter	1	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3844	12	Env [n] excessive battery current critical	Counter	1	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3845	12	Env [n] charging alarms register	Counter	2	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3846	12	Env [n] input voltage error	Counter	2	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3847	12	Env [n] rpu enabled	Counter	2	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3848	12	Env [n] input current error	Counter	2	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3849	12	Env [n] excessive input current	Counter	2	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3850	12	Env [n] load current error	Counter	2	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3851	12	Env [n] excessive load current warning	Counter	2	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3852	12	Env [n] excessive load current	Counter	2	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3853	12	Env [n] GHI alarms register	Counter	3	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3854	12	Env [n] GHI irradiance error	Counter	3	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3855	12	Env [n] GHI irradiance negative	Counter	3	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3856	12	Env [n] GHI irradiance above solar constant	Counter	3	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3857	12	Env [n] GHI temperature corrected irradiance error	Counter	3	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3858	12	Env [n] GHI temperature corrected irradiance negative	Counter	3	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3859	12	Env [n] GHI temperature corrected irradiance above solar constant	Counter	3	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3860	12	Env [n] GHI case temperature error	Counter	3	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3861	12	Env [n] GHI case temperature below operating range	Counter	3	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3862	12	Env [n] GHI case temperature above operating range	Counter	3	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3863	12	Env [n] GHI irradiance insufficient activity	Counter	3	32-bit bitfield	31	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3864	12	Env [n] POA alarms register	Counter	4	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3865	12	Env [n] POA irradiance error	Counter	3	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3866	12	Env [n] POA irradiance negative	Counter	3	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3867	12	Env [n] POA irradiance above solar constant	Counter	3	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3868	12	Env [n] POA temperature corrected irradiance error	Counter	3	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3869	12	Env [n] POA temperature corrected irradiance negative	Counter	3	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3870	12	Env [n] POA temperature corrected irradiance above solar constant	Counter	3	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3871	12	Env [n] POA case temperature error	Counter	3	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3872	12	Env [n] POA case temperature below operating range	Counter	3	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3873	12	Env [n] POA case temperature above operating range	Counter	3	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3874	12	Env [n] POA irradiance insufficient activity	Counter	3	32-bit bitfield	31	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3875	12	Env [n] multifunction alarms register	Counter	5	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3876	12	Env [n] ambient temperature error	Counter	4	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3877	12	Env [n] ambient temperature below operating range	Counter	4	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3878	12	Env [n] ambient temperature above operating range	Counter	4	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3879	12	Env [n] dew point error	Counter	4	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3880	12	Env [n] dew point above ambient temperature	Counter	4	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3881	12	Env [n] condensation warning	Counter	4	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3882	12	Env [n] relative humidity error	Counter	4	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3883	12	Env [n] relative humidity below operating range	Counter	4	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3884	12	Env [n] relative humidity above operating range	Counter	4	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3885	12	Env [n] absolute barometric pressure error	Counter	4	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3886	12	Env [n] absolute barometric pressure below operating range	Counter	4	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3887	12	Env [n] absolute barometric pressure above operating range	Counter	4	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3888	12	Env [n] sea level barometric pressure error	Counter	4	32-bit bitfield	24	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3889	12	Env [n] sea level barometric pressure below operating range	Counter	4	32-bit bitfield	25	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4067	13	Cap bank manual close open command	Binary output	3	Boolean	LOn:LOff	\N	\N	\N	Close	Open	\N	\N	\N	\N
+3890	12	Env [n] sea level barometric pressure above operating range	Counter	4	32-bit bitfield	26	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3891	12	Env [n] wind alarms register	Counter	6	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3892	12	Env [n] wind speed error	Counter	5	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3893	12	Env [n] wind speed below operating range	Counter	5	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3894	12	Env [n] wind speed above operating range	Counter	5	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3895	12	Env [n] wind speed unable to execute measurement due to ambient conditions	Counter	5	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3896	12	Env [n] wind speed quality warning	Counter	5	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3897	12	Env [n] wind speed quality error	Counter	5	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3898	12	Env [n] wind speed max error	Counter	5	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3899	12	Env [n] wind speed max below operating range	Counter	5	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3900	12	Env [n] wind speed max above operating range	Counter	5	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3901	12	Env [n] wind direction error	Counter	5	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3902	12	Env [n] wind direction below operating range	Counter	5	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3903	12	Env [n] wind direction above operating range	Counter	5	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3904	12	Env [n] compass error	Counter	5	32-bit bitfield	24	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3905	12	Env [n] compass below operating range	Counter	5	32-bit bitfield	25	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3906	12	Env [n] compass above operating range	Counter	5	32-bit bitfield	26	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3907	12	Env [n] wind speed insufficient activity	Counter	5	32-bit bitfield	31	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3908	12	Env [n] rain alarms regsiter	Counter	7	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3909	12	Env [n] rain total error	Counter	6	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3910	12	Env [n] rain total negative	Counter	6	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3911	12	Env [n] rain total above operating range	Counter	6	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3912	12	Env [n] rain intensity error	Counter	6	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3913	12	Env [n] rain intensity negative	Counter	6	32-bit bitfield	9	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3914	12	Env [n] rain intensity above operating range	Counter	6	32-bit bitfield	10	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3915	12	Env [n] rain today error	Counter	6	32-bit bitfield	16	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3916	12	Env [n] rain today is negative	Counter	6	32-bit bitfield	17	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3917	12	Env [n] rain today above operating range	Counter	6	32-bit bitfield	18	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3918	12	Env [n] BOM alarm register	Counter	8	32-bit bitfield	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
+3919	12	Env [n] BOM 1 temperature error	Counter	7	32-bit bitfield	0	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3920	12	Env [n] BOM 1 temperature below operating range	Counter	7	32-bit bitfield	1	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3921	12	Env [n] BOM 1 temperature above operating range	Counter	7	32-bit bitfield	2	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3922	12	Env [n] BOM 2 temperature error	Counter	7	32-bit bitfield	3	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3923	12	Env [n] BOM 2 temperature below operating range	Counter	7	32-bit bitfield	4	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3924	12	Env [n] BOM 2 temperature above operating range	Counter	7	32-bit bitfield	5	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3925	12	Env [n] BOM 3 temperature error	Counter	7	32-bit bitfield	6	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3926	12	Env [n] BOM 3 temperature below operating range	Counter	7	32-bit bitfield	7	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3927	12	Env [n] BOM 3 temperature above operating range	Counter	7	32-bit bitfield	8	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3928	12	Env [n] summary alarm	Binary input	0	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3929	12	Env [n] maintenance button pressed	Binary input	1	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3930	12	Env [n] pyranometer heat status	Binary input	2	Boolean	\N	\N	\N	None	On	Off	\N	\N	\N	\N
+3931	12	Env [n] communication failure alarm	Binary input	3	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3932	12	Env [p] POA irradiance error	Binary input	4	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3933	12	Env [p] POA irradiance negative	Binary input	5	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3934	12	Env [p] POA irradiance above solar constant	Binary input	6	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3935	12	Env [p] POA temperature corrected irradiance error	Binary input	7	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3936	12	Env [p] POA temperature corrected irradiance negative	Binary input	8	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3937	12	Env [p] POA temperature corrected irradiance above solar constant	Binary input	9	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3938	12	Env [p] POA case temperature error	Binary input	10	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3939	12	Env [p] POA case temperature below operating range	Binary input	11	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3940	12	Env [p] POA case temperature above operating range	Binary input	12	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3941	12	Env [p] POA irradiance insufficient activity	Binary input	13	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3942	12	Env [p] communication failure alarm	Binary input	14	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3943	12	Env [s] soiling ratio out of range	Binary input	15	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3944	12	Env [s] heavy soiling alarm	Binary input	16	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	Soiling ratio below 0.93
+3945	12	Env [s] extremely heavy soiling alarm	Binary input	17	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	Soiling ratio below 0.87
+3946	12	Env [s] soiling ratio insufficient activity	Binary input	18	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3947	12	Env [s] clean panel BOM temperature error	Binary input	19	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3948	12	Env [s] clean panel BOM temperature below operating range	Binary input	20	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3949	12	Env [s] clean panel BOM temperature above operating range	Binary input	21	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3950	12	Env [s] soiled panel BOM temperature error	Binary input	22	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3951	12	Env [s] soiled panel BOM temperature below operating range	Binary input	23	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3952	12	Env [s] soiled panel BOM temperature above operating range	Binary input	24	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3953	12	Env [s] BOM temperature difference too great	Binary input	25	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3954	12	Env [s] clean panel ISC out of range	Binary input	26	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3955	12	Env [s] soiled panel ISC out of range	Binary input	27	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3956	12	Env [s] ISC difference too great	Binary input	28	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3957	12	Env [s] data logger watchdog error	Binary input	29	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3958	12	Env [s] data logger skipped main scan	Binary input	30	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3959	12	Env [s] data logger skipped slow scan	Binary input	31	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3960	12	Env [s] data logger program variable out of bounds	Binary input	32	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3961	12	Env [s] data logger low 12V	Binary input	33	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3962	12	Env [s] data logger low 5V	Binary input	34	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3963	12	Env [s] data logger lithium battery error	Binary input	35	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3964	12	Env [s] data logger lithium battery low	Binary input	36	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3965	12	Env [s] data logger lithium battery critical	Binary input	37	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3966	12	Env [s] data logger voltage error	Binary input	38	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3967	12	Env [s] data logger low voltage warning	Binary input	39	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3968	12	Env [s] data logger low voltage	Binary input	40	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3969	12	Env [s] data logger over voltage	Binary input	41	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3970	12	Env [s] data logger temperature error	Binary input	42	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3971	12	Env [s] data logger temperature below operating range	Binary input	43	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3972	12	Env [s] data logger temperature above operating range	Binary input	44	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3973	12	Env [s] communication failure alarm	Binary input	45	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3974	12	Env [a] GHI irradiance error	Binary input	46	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3975	12	Env [a] GHI irradiance negative	Binary input	47	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3976	12	Env [a] GHI irradiance above solar constant	Binary input	48	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3977	12	Env [a] GHI irradiance insufficient activity	Binary input	49	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3978	12	Env [a] RHI irradiance error	Binary input	50	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3979	12	Env [a] RHI irradiance negative	Binary input	51	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3980	12	Env [a] RHI irradiance above solar constant	Binary input	52	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3981	12	Env [a] RHI irradiance insufficient activity	Binary input	53	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3982	12	Env [a] GHI case temperature error	Binary input	54	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3983	12	Env [a] GHI case temperature below operating range	Binary input	55	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3984	12	Env [a] GHI case temperature above operating range	Binary input	56	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3985	12	Env [a] RHI case temperature error	Binary input	57	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3986	12	Env [a] RHI case temperature below operating range	Binary input	58	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3987	12	Env [a] RHI case temperature above operating range	Binary input	59	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3988	12	Env [a] albedo out of range	Binary input	60	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3989	12	Env [a] data logger watchdog error	Binary input	61	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3990	12	Env [a] data logger skipped main scan	Binary input	62	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3991	12	Env [a] data logger skipped slow scan	Binary input	63	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3992	12	Env [a] data logger program variable out of bounds	Binary input	64	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3993	12	Env [a] data logger low 12V	Binary input	65	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3994	12	Env [a] data logger low 5V	Binary input	66	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3995	12	Env [a] data logger lithium battery error	Binary input	67	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3996	12	Env [a] data logger lithium battery low	Binary input	68	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3997	12	Env [a] data logger lithium battery critical	Binary input	69	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3998	12	Env [a] data logger voltage error	Binary input	70	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+3999	12	Env [a] data logger low voltage warning	Binary input	71	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4000	12	Env [a] data logger low voltage	Binary input	72	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4001	12	Env [a] data logger over voltage	Binary input	73	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4002	12	Env [a] data logger temperature error	Binary input	74	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4003	12	Env [a] data logger temperature below operating range	Binary input	75	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4004	12	Env [a] data logger temperature above operating range	Binary input	76	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4005	12	Env [a] communication failure alarm	Binary input	77	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4068	13	Cap bank automatic control enable disable	Binary output	4	Boolean	LOn:LOff	\N	\N	\N	Auto	Manual	\N	\N	\N	\N
+4006	13	Plant status	Analog input	0	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Plant Operation Status:\n ESTOP  0;\n STOPPED  1;\n STANDBY  2;\n WARMUP  3;\n RUN_NIGHT_SVC  4;\n RUN_OPEN_LOOP  5;\n RUN_OL_RAMP  6;\n RUN_CLOSED_LOOP  7;\n RUN_CL_RAMP  8;\n SHUTTING_DOWN  9	\N
 4007	13	Active power mode feedback	Analog input	1	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Active power modes:\nUnlimited   0\nCurtailment  1\nDispatch  2	\N
 4008	13	Active power setpoint feedback	Analog input	2	32-bit float	\N	MW	1	\N	\N	\N	\N	\N	\N	\N
 4009	13	Reactive power mode feedback	Analog input	3	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Reactive power modes:\n\n0 - Off\n1 - Var output regulation\n2 - PF regulation\n3 - AVR (voltage regulation)\n	\N
@@ -4364,48 +4364,48 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 4024	13	Net energy generation today	Analog input	18	32-bit float	\N	MWh	1	\N	\N	\N	\N	\N	\N	\N
 4025	13	Net energy generation yesterday	Analog input	19	32-bit float	\N	MWh	1	\N	\N	\N	\N	\N	\N	\N
 4026	13	Number of inverters online	Analog input	20	32-bit float	\N	count	1	\N	\N	\N	\N	\N	\N	\N
-4027	13	Number of inverters available	Analog input	21	32-bit float	\N	┬á	\N	\N	\N	\N	\N	\N	\N	┬á
-4028	13	Average BOM temperature	Analog input	22	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	┬á
-4029	13	Average ambient temperature	Analog input	23	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	┬á
-4030	13	Average wind speed	Analog input	24	32-bit float	\N	m/s	1	\N	\N	\N	\N	\N	\N	┬á
-4031	13	Prevailing wind direction	Analog input	25	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	┬á
-4032	13	Average GHI irradiance	Analog input	26	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	┬á
-4033	13	Average POA irradiance	Analog input	27	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	┬á
-4034	13	Average relative humidity	Analog input	28	32-bit float	\N	%	1	\N	\N	\N	\N	\N	\N	┬á
-4035	13	Average barometric pressure	Analog input	29	32-bit float	\N	mbar	1	\N	\N	\N	\N	\N	\N	┬á
-4036	13	Average rain intensity	Analog input	30	32-bit float	\N	mm/hr	1	\N	\N	\N	\N	\N	\N	┬á
-4037	13	Active power ramp rate feedback	Analog input	31	32-bit float	\N	kW/s	1	\N	\N	\N	\N	\N	\N	┬á
-4038	13	Reactive power ramp rate feedback	Analog input	32	32-bit float	\N	kvar/s	1	\N	\N	\N	\N	\N	\N	┬á
-4039	13	Grid curtailment setpoint (SPARE)	Analog input	33	32-bit float	\N	MW	1	\N	\N	\N	\N	\N	\N	┬á
-4040	13	Active power mode	Analog output	0	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Active power modes:\nUnlimited   0\nCurtailment  1\nDispatch  2	┬á
-4041	13	Active power setpoint	Analog output	1	32-bit float	\N	MW	1	\N	\N	\N	\N	\N	\N	┬á
-4042	13	Reactive power mode	Analog output	2	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Reactive power modes:\n\n0 - Off\n1 - Var output regulation\n2 - PF regulation\n3 - AVR (voltage regulation)\n	┬á
-4043	13	Voltage regulation setpoint	Analog output	3	32-bit float	\N	kV	1	\N	\N	\N	\N	\N	\N	┬á
-4044	13	Power factor regulation setpoint	Analog output	4	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	┬á
-4045	13	Var output regulation setpoint	Analog output	5	32-bit float	\N	Mvar	1	\N	\N	\N	\N	\N	\N	┬á
-4046	13	Control command source	Analog output	6	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Command/Setpoint Source:\n0 - HMI only\n1 - Interface only\n2 - HMI and interface	┬á
-4047	13	Setpoint source	Analog output	7	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Command/Setpoint Source:\n0 - HMI only\n1 - Interface only\n2 - HMI and interface	┬á
-4048	13	Active power ramp rate	Analog output	8	32-bit float	\N	kW/s	1	\N	\N	\N	\N	\N	┬á	┬á
-4049	13	Reactive power ramp rate	Analog output	9	32-bit float	\N	kvar/s	1	\N	\N	\N	\N	\N	┬á	┬á
-4050	13	Primary meter communication alarm	Binary input	0	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4051	13	Backup meter communication alarm	Binary input	1	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4052	13	Backup meter in use for generation control	Binary input	2	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4053	13	Primary - backup meter disagreement alarm	Binary input	3	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4054	13	Open loop operation alarm	Binary input	4	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4055	13	Night SVC enable feedback	Binary input	5	Boolean	\N	\N	\N	None	Enable	Disable	\N	\N	┬á	┬á
-4056	13	Cap bank PPC control enable feedback	Binary input	6	Boolean	\N	\N	\N	None	Enable	Disable	\N	\N	┬á	┬á
-4057	13	Cap bank in manual control	Binary input	7	Boolean	\N	\N	\N	None	Manual	Auto	\N	\N	┬á	┬á
-4058	13	Cap bank position error	Binary input	8	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4059	13	Command source alarm	Binary input	9	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4060	13	Invalid command value alarm	Binary input	10	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	┬á	┬á
-4061	13	Last setpoint source	Binary input	11	Boolean	\N	\N	\N	None	Interface	HMI	\N	\N	┬á	┬á
-4062	13	Grid curtailment flag	Binary input	12	Boolean	\N	\N	\N	None	On	Off	\N	\N	┬á	┬á
-4063	13	RTU permit to operate cap bank	Binary input	13	Boolean	\N	\N	\N	Off (0)	Enable	Disable	\N	\N	┬á	┬á
-4064	13	Plant start stop command	Binary output	0	Boolean	LOn:LOff	\N	\N	\N	Start	Stop	\N	\N	┬á	┬á
-4065	13	Night SVC enable disable command	Binary output	1	Boolean	LOn:LOff	\N	\N	\N	Enable	Disable	\N	\N	┬á	┬á
-4066	13	Cap bank PPC control enable disable command	Binary output	2	Boolean	LOn:LOff	\N	\N	\N	Enable	Disable	\N	\N	┬á	┬á
-4069	13	Emergency stop command	Binary output	5	Boolean	LOn	\N	\N	\N	Stop	\N	\N	\N	┬á	┬á
-4070	13	Curtailment enable disable from grid control	Binary output	6	Boolean	LOn:LOff	\N	\N	┬á	Enable	Disable	\N	\N	┬á	┬á
+4027	13	Number of inverters available	Analog input	21	32-bit float	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+4028	13	Average BOM temperature	Analog input	22	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+4029	13	Average ambient temperature	Analog input	23	32-bit float	\N	degC	1	\N	\N	\N	\N	\N	\N	\N
+4030	13	Average wind speed	Analog input	24	32-bit float	\N	m/s	1	\N	\N	\N	\N	\N	\N	\N
+4031	13	Prevailing wind direction	Analog input	25	32-bit float	\N	degrees	1	\N	\N	\N	\N	\N	\N	\N
+4032	13	Average GHI irradiance	Analog input	26	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+4033	13	Average POA irradiance	Analog input	27	32-bit float	\N	W/m2	1	\N	\N	\N	\N	\N	\N	\N
+4034	13	Average relative humidity	Analog input	28	32-bit float	\N	%	1	\N	\N	\N	\N	\N	\N	\N
+4035	13	Average barometric pressure	Analog input	29	32-bit float	\N	mbar	1	\N	\N	\N	\N	\N	\N	\N
+4036	13	Average rain intensity	Analog input	30	32-bit float	\N	mm/hr	1	\N	\N	\N	\N	\N	\N	\N
+4037	13	Active power ramp rate feedback	Analog input	31	32-bit float	\N	kW/s	1	\N	\N	\N	\N	\N	\N	\N
+4038	13	Reactive power ramp rate feedback	Analog input	32	32-bit float	\N	kvar/s	1	\N	\N	\N	\N	\N	\N	\N
+4039	13	Grid curtailment setpoint (SPARE)	Analog input	33	32-bit float	\N	MW	1	\N	\N	\N	\N	\N	\N	\N
+4040	13	Active power mode	Analog output	0	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Active power modes:\nUnlimited   0\nCurtailment  1\nDispatch  2	\N
+4041	13	Active power setpoint	Analog output	1	32-bit float	\N	MW	1	\N	\N	\N	\N	\N	\N	\N
+4042	13	Reactive power mode	Analog output	2	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Reactive power modes:\n\n0 - Off\n1 - Var output regulation\n2 - PF regulation\n3 - AVR (voltage regulation)\n	\N
+4043	13	Voltage regulation setpoint	Analog output	3	32-bit float	\N	kV	1	\N	\N	\N	\N	\N	\N	\N
+4044	13	Power factor regulation setpoint	Analog output	4	32-bit float	\N	PU	1	\N	\N	\N	\N	\N	\N	\N
+4045	13	Var output regulation setpoint	Analog output	5	32-bit float	\N	Mvar	1	\N	\N	\N	\N	\N	\N	\N
+4046	13	Control command source	Analog output	6	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Command/Setpoint Source:\n0 - HMI only\n1 - Interface only\n2 - HMI and interface	\N
+4047	13	Setpoint source	Analog output	7	32-bit float	\N	enumeration	1	\N	\N	\N	\N	\N	Command/Setpoint Source:\n0 - HMI only\n1 - Interface only\n2 - HMI and interface	\N
+4048	13	Active power ramp rate	Analog output	8	32-bit float	\N	kW/s	1	\N	\N	\N	\N	\N	\N	\N
+4049	13	Reactive power ramp rate	Analog output	9	32-bit float	\N	kvar/s	1	\N	\N	\N	\N	\N	\N	\N
+4050	13	Primary meter communication alarm	Binary input	0	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4051	13	Backup meter communication alarm	Binary input	1	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4052	13	Backup meter in use for generation control	Binary input	2	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4053	13	Primary - backup meter disagreement alarm	Binary input	3	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4054	13	Open loop operation alarm	Binary input	4	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4055	13	Night SVC enable feedback	Binary input	5	Boolean	\N	\N	\N	None	Enable	Disable	\N	\N	\N	\N
+4056	13	Cap bank PPC control enable feedback	Binary input	6	Boolean	\N	\N	\N	None	Enable	Disable	\N	\N	\N	\N
+4057	13	Cap bank in manual control	Binary input	7	Boolean	\N	\N	\N	None	Manual	Auto	\N	\N	\N	\N
+4058	13	Cap bank position error	Binary input	8	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4059	13	Command source alarm	Binary input	9	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4060	13	Invalid command value alarm	Binary input	10	Boolean	\N	\N	\N	On (1)	Alarm	Normal	\N	\N	\N	\N
+4061	13	Last setpoint source	Binary input	11	Boolean	\N	\N	\N	None	Interface	HMI	\N	\N	\N	\N
+4062	13	Grid curtailment flag	Binary input	12	Boolean	\N	\N	\N	None	On	Off	\N	\N	\N	\N
+4063	13	RTU permit to operate cap bank	Binary input	13	Boolean	\N	\N	\N	Off (0)	Enable	Disable	\N	\N	\N	\N
+4064	13	Plant start stop command	Binary output	0	Boolean	LOn:LOff	\N	\N	\N	Start	Stop	\N	\N	\N	\N
+4065	13	Night SVC enable disable command	Binary output	1	Boolean	LOn:LOff	\N	\N	\N	Enable	Disable	\N	\N	\N	\N
+4066	13	Cap bank PPC control enable disable command	Binary output	2	Boolean	LOn:LOff	\N	\N	\N	Enable	Disable	\N	\N	\N	\N
+4069	13	Emergency stop command	Binary output	5	Boolean	LOn	\N	\N	\N	Stop	\N	\N	\N	\N	\N
+4070	13	Curtailment enable disable from grid control	Binary output	6	Boolean	LOn:LOff	\N	\N	\N	Enable	Disable	\N	\N	\N	\N
 4071	14	TRK-[n] Firmware version	Holding Register	450000	32-bit signed integer	\N	unitless	1	\N	\N	\N	\N	\N	\N	\N
 4072	14	TRK-[n] NCU serial number	Holding Register	450002	String	\N	ASCII	16	\N	\N	\N	\N	\N	\N	\N
 4073	14	TRK-[n] Time zone	Holding Register	450010	16-bit signed integer	\N	hr	1	\N	\N	\N	\N	\N	\N	\N
@@ -4421,7 +4421,7 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 4083	14	TRK-[n] NCU UTC time month	Holding Register	450027	32-bit signed integer	\N	month	1	\N	\N	\N	\N	\N	\N	\N
 4084	14	TRK-[n] NCU UTC time year	Holding Register	450028	32-bit signed integer	\N	year	1	\N	\N	\N	\N	\N	\N	\N
 4085	14	TRK-[n] AC Power Fault	Holding Register	450029	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	\N	Faults can be cleared by writing a 0 to this point.
-4086	14	TRK-[n] Global tracker state	Holding Register	450031	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	0-5: R/W, 6-10: R/O	\N
+4086	14	TRK-[n] Global tracker state	Holding Register	450031	32-bit signed integer	\N	enumeration	1	\N	\N	\N	\N	\N	0-5: R/W; 6-10: R/O	\N
 4087	14	TRK-[n] SPCs and WS connected	Holding Register	450032	32-bit signed integer	\N	count	1	\N	\N	\N	\N	\N	\N	\N
 4088	14	TRK-[n] Wind speed	Holding Register	450033	32-bit signed integer	\N	mph	1	\N	\N	\N	\N	\N	\N	\N
 4089	14	TRK-[n] Water level	Holding Register	450034	32-bit signed integer	\N	in	100	\N	\N	\N	\N	\N	\N	\N
@@ -4542,7 +4542,7 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 4204	14	TRK-[n] weather station water level	Input Register	4[w]75	16-bit signed integer	\N	in	0.01	\N	\N	\N	\N	\N	\N	\N
 4205	14	TRK-[n] weather station snow height	Input Register	4[w]76	16-bit signed integer	\N	in	0.01	\N	\N	\N	\N	\N	\N	\N
 4206	14	TRK-[n] weather station wind speed	Input Register	4[w]77	16-bit signed integer	\N	mph	0.01	\N	\N	\N	\N	\N	\N	\N
-4207	15	30BAT-[n] Battery voltage	Holding Register	400772	16-bit unsigned integer	\N	V	\N	\N	Analog	\N	655.35	22.5,23,28.4,29.4	\N	\N
+4207	15	30BAT-[n] Battery voltage	Holding Register	400772	16-bit unsigned integer	\N	V	\N	\N	Analog	\N	655.35	22.5;23;28.4;29.4	\N	\N
 4208	15	30BAT-[n] Battery current	Holding Register	400773	16-bit signed integer	\N	A	\N	\N	\N	\N	3276.7	\N	\N	\N
 4209	15	30BAT-[n] Charger on/off	Holding Register	400775	16-bit unsigned integer	\N	enumeration	\N	\N	\N	\N	65535	\N	Charger Mode:\n1 - On\n4 - Off\n	\N
 4210	15	30BAT-[n] Charge state	Holding Register	400776	16-bit unsigned integer	\N	enumeration	\N	\N	Analog	\N	65535	2	Charge State:\n0 - OFF\n2 - Fault\n3 - Bulk\n4 - Absorbtion\n5 - Float\n6 - Storage\n7 - Equalize\n11 - Other\n252 - External control	\N
@@ -4552,7 +4552,7 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 4214	15	30BAT-[n] Maximum charge power today	Holding Register	400786	16-bit unsigned integer	\N	W	\N	\N	\N	\N	65535	\N	\N	\N
 4215	15	30BAT-[n] Yield yesterday	Holding Register	400787	16-bit unsigned integer	\N	kWh	\N	\N	\N	\N	6553.5	\N	\N	\N
 4216	15	30BAT-[n] Maximum charge power yesterday	Holding Register	400788	16-bit unsigned integer	\N	W	\N	\N	\N	\N	65535	\N	\N	\N
-4217	15	30BAT-[n] Error code	Holding Register	400789	16-bit unsigned integer	\N	enumeration	\N	\N	Analog	\N	65535	n/a,0,0,n/a	\N	\N
+4217	15	30BAT-[n] Error code	Holding Register	400789	16-bit unsigned integer	\N	enumeration	\N	\N	Analog	\N	65535	n/a;0;0;n/a	\N	\N
 4218	15	30BAT-[n] PV power	Holding Register	400790	16-bit unsigned integer	\N	W	\N	\N	\N	\N	6553.5	\N	Error Codes:\n0=No error;\n1=Battery temperature too high;\n2=Battery voltage too high;\n3=Battery temperature sensor miswired (+);\n4=Battery temperature sensor miswired (-);\n5=Battery temperature sensor disconnected;\n6=Battery voltage sense miswired (+);\n7=Battery voltage sense miswired (-);\n8=Battery voltage sense disconnected;\n9=Battery voltage wire losses too high;\n17=Charger temperature too high;\n18=Charger over-current;\n19=Charger current polarity reversed;\n20=Bulk time limit reached;\n22=Charger temperature sensor miswired;\n23=Charger temperature sensor disconnected;\n34=Input current too high\n	\N
 4219	15	30BAT-[n] User yield	Holding Register	400791	16-bit unsigned integer	\N	kWh	\N	\N	\N	\N	6553.5	\N	\N	\N
 4220	15	30BAT-[n] MPP operation mode	Holding Register	400792	16-bit unsigned integer	\N	enumeration	\N	\N	\N	\N	65535	\N	MPPT Mode:\n0 - OFF\n1 - Voltage/Current Limited\n2 - MPPT\n255 - Not Available	\N
@@ -4564,21 +4564,21 @@ COPY public.map_point (id, version_id, point_name, object_name, register, data_t
 --
 
 COPY public.map_version (id, interface_id, version, release_date, changelog) FROM stdin;
-1	1	unversioned	\N	\N
-2	2	unversioned	\N	\N
-3	3	unversioned	\N	\N
-4	4	unversioned	\N	\N
-5	5	unversioned	\N	\N
-6	6	unversioned	\N	\N
-7	7	unversioned	\N	\N
-8	8	unversioned	\N	\N
-9	9	unversioned	\N	\N
-10	10	unversioned	\N	\N
-11	11	unversioned	\N	\N
-12	12	unversioned	\N	\N
-13	13	unversioned	\N	\N
-14	14	unversioned	\N	\N
-15	15	unversioned	\N	\N
+1	1	1.0	\N	\N
+2	2	1.0	\N	\N
+3	3	1.0	\N	\N
+4	4	1.0	\N	\N
+5	5	1.0	\N	\N
+6	6	1.0	\N	\N
+7	7	1.0	\N	\N
+8	8	1.0	\N	\N
+9	9	1.0	\N	\N
+10	10	1.0	\N	\N
+11	11	1.0	\N	\N
+12	12	1.0	\N	\N
+13	13	1.0	\N	\N
+14	14	1.0	\N	\N
+15	15	1.0	\N	\N
 \.
 
 

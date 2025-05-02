@@ -21,7 +21,8 @@ import {
   createMapPoint,
   updateMapPoint,
   deleteMapPoint,
-  exportMapPointsCSV
+  exportMapPointsCSV,
+  replaceMapPoints
 } from '../services/api'
 import { MapPoint, MapVersion } from '../types'
 
@@ -34,6 +35,7 @@ export const MapPoints = () => {
   const [selectedVersion, setSelectedVersion] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [confirmImport, setConfirmImport] = useState<{ file: File; points: any[] } | null>(null)
   const [formData, setFormData] = useState({
     version_id: '',
     point_name: '',
@@ -105,9 +107,9 @@ export const MapPoints = () => {
     }
   })
 
-  const bulkCreateMutation = useMutation({
-    mutationFn: (points: Partial<MapPoint>[]) => 
-      Promise.all(points.map(point => createMapPoint(point))),
+  const replaceMutation = useMutation({
+    mutationFn: ({ versionId, points }: { versionId: number, points: any[] }) =>
+      replaceMapPoints(versionId, points),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['points', selectedVersion] })
       setSuccess('Points imported successfully')
@@ -221,26 +223,32 @@ export const MapPoints = () => {
           throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
         }
         
-        const points = lines.slice(1).map((line, index) => {
+        const points = lines.slice(1).map((line, lineIndex) => {
           const values = line.split(',').map(v => v.trim())
           if (values.length !== headers.length) {
-            throw new Error(`Invalid number of columns in row ${index + 2}`)
+            throw new Error(`Invalid number of columns in row ${lineIndex + 2}`)
           }
 
           const point: Record<string, any> = {
+            version: {
+              id: parseInt(selectedVersion)
+            },
             version_id: parseInt(selectedVersion)
           }
           
           headers.forEach((header, index) => {
             if (values[index]) {
               if (header === 'scale') {
-                const scale = parseFloat(values[index])
-                if (isNaN(scale)) {
-                  throw new Error(`Invalid scale value in row ${index + 2}`)
+                const cleanValue = values[index].replace(/['"]/g, '').trim() // Remove quotes and trim whitespace
+                if (cleanValue) { // Only parse if there's a value
+                  const scale = parseFloat(cleanValue)
+                  if (isNaN(scale)) {
+                    throw new Error(`Invalid scale value '${values[index]}' in row ${lineIndex + 2}. Please ensure it is a valid number.`)
+                  }
+                  point[header] = scale
                 }
-                point[header] = scale
               } else {
-                point[header] = values[index]
+                point[header] = values[index].trim()
               }
             }
           })
@@ -248,7 +256,7 @@ export const MapPoints = () => {
           // Validate required fields
           requiredColumns.forEach(field => {
             if (!point[field]) {
-              throw new Error(`Missing ${field} in row ${index + 2}`)
+              throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
             }
           })
           
@@ -259,7 +267,9 @@ export const MapPoints = () => {
           throw new Error('No valid points found in CSV')
         }
 
-        await bulkCreateMutation.mutateAsync(points)
+        // Instead of immediate import, set confirmation state
+        setConfirmImport({ file, points })
+
       } catch (error: any) {
         setError(error.message || 'Error importing points')
       }
@@ -272,6 +282,24 @@ export const MapPoints = () => {
     event.target.value = ''
   }
 
+  const handleConfirmImport = async () => {
+    if (!confirmImport) return
+
+    try {
+      await replaceMutation.mutateAsync({
+        versionId: parseInt(selectedVersion),
+        points: confirmImport.points
+      })
+      setConfirmImport(null)
+    } catch (error: any) {
+      setError(error.message || 'Error importing points')
+    }
+  }
+
+  const handleCancelImport = () => {
+    setConfirmImport(null)
+  }
+
   const handleExport = async () => {
     if (!selectedVersion) {
       setError('Please select a map version first')
@@ -280,10 +308,16 @@ export const MapPoints = () => {
 
     try {
       const response = await exportMapPointsCSV(parseInt(selectedVersion))
+      const currentVersion = versions.find(v => v.id.toString() === selectedVersion)
+      if (!currentVersion) {
+        throw new Error('Selected version not found')
+      }
+      const fileName = `${currentVersion.interface.name}_v${currentVersion.version}_points.csv`
+        .replace(/[^a-z0-9-_\.]/gi, '_') // Replace any special characters with underscores
       const url = window.URL.createObjectURL(new Blob([response.data]))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', `map_points_${selectedVersion}.csv`)
+      link.setAttribute('download', fileName)
       document.body.appendChild(link)
       link.click()
       link.remove()
@@ -294,13 +328,13 @@ export const MapPoints = () => {
   }
 
   const columns = [
-    { id: 'point_name', label: 'Point Name', minWidth: 170 },
-    { id: 'object_name', label: 'Object Name', minWidth: 130 },
-    { id: 'register', label: 'Register', minWidth: 100 },
-    { id: 'data_type', label: 'Data Type', minWidth: 100 },
-    { id: 'units', label: 'Units', minWidth: 100 },
-    { id: 'scale', label: 'Scale', minWidth: 70 },
-    { id: 'comments', label: 'Comments', minWidth: 200 }
+    { id: 'point_name', label: 'Point Name', minWidth: 170, sortable: true },
+    { id: 'object_name', label: 'Object Name', minWidth: 130, sortable: true },
+    { id: 'register', label: 'Register', minWidth: 100, sortable: true },
+    { id: 'data_type', label: 'Data Type', minWidth: 100, sortable: true },
+    { id: 'units', label: 'Units', minWidth: 100, sortable: true },
+    { id: 'scale', label: 'Scale', minWidth: 70, sortable: true },
+    { id: 'comments', label: 'Comments', minWidth: 200, sortable: true }
   ]
 
   return (
@@ -368,6 +402,22 @@ export const MapPoints = () => {
           onDelete={(point) => deleteMutation.mutate(point.id)}
         />
       </Box>
+
+      <Dialog
+        open={!!confirmImport}
+        onClose={handleCancelImport}
+      >
+        <DialogTitle>Confirm Import</DialogTitle>
+        <DialogContent>
+          <p>This will replace all existing points in the selected version with {confirmImport?.points.length} points from the CSV file. Are you sure you want to continue?</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelImport}>Cancel</Button>
+          <Button onClick={handleConfirmImport} variant="contained" color="primary">
+            Import
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Snackbar 
         open={!!error} 

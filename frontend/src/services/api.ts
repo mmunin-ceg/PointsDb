@@ -34,6 +34,8 @@ export const createMapPoint = (data: any) => api.post('/map-points', data)
 export const createMapPointsBulk = (data: any[]) => api.post('/map-points/bulk', data)
 export const updateMapPoint = (id: number, data: any) => api.put(`/map-points/${id}`, data)
 export const deleteMapPoint = (id: number) => api.delete(`/map-points/${id}`)
+export const deleteMapPointsByVersion = (versionId: number) => api.delete(`/map-points/version/${versionId}`)
+export const replaceMapPoints = (versionId: number, points: any[]) => api.post(`/map-points/version/${versionId}/replace`, points)
 
 // Project endpoints
 export const getProjects = () => api.get('/projects')

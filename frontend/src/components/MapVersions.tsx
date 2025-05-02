@@ -121,17 +121,19 @@ export const MapVersions = () => {
       id: 'interface',
       label: 'Interface',
       minWidth: 170,
+      sortable: true,
       format: (value: DataInterface) => value.name
     },
-    { id: 'version', label: 'Version', minWidth: 100 },
+    { id: 'version', label: 'Version', minWidth: 100, sortable: true },
     {
       id: 'release_date',
       label: 'Release Date',
       minWidth: 130,
+      sortable: true,
       format: (value: string) =>
         value ? new Date(value).toLocaleDateString() : ''
     },
-    { id: 'changelog', label: 'Changelog', minWidth: 200 }
+    { id: 'changelog', label: 'Changelog', minWidth: 200, sortable: true }
   ]
 
   return (

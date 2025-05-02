@@ -20,7 +20,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
-app.use(express.json())
+// Increase JSON payload limit to 50MB
+app.use(express.json({ limit: '50mb' }))
 
 // Register routes
 app.use('/api-providers', apiProviderRouter)
