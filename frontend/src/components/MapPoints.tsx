@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import * as XLSX from 'xlsx'
+import ExcelJS from 'exceljs'
 import {
   Dialog,
   DialogTitle,
@@ -210,144 +210,138 @@ export const MapPoints = () => {
       return
     }
 
-    const reader = new FileReader()
-    reader.onload = async (e) => {
-      try {
-        let points: Record<string, any>[] = []
+    try {
+      let points: Record<string, any>[] = []
+      const requiredColumns = ['point_name', 'object_name', 'register', 'data_type']
 
-        if (file.name.endsWith('.csv')) {
-          // Handle CSV file
-          const csv = e.target?.result as string
-          const lines = csv.split('\n').filter(line => line.trim())
-          const headers = lines[0].split(',').map(h => h.trim().toLowerCase())
-
-          // Validate required columns
-          const requiredColumns = ['point_name', 'object_name', 'register', 'data_type']
-          const missingColumns = requiredColumns.filter(col => !headers.includes(col))
-          
-          if (missingColumns.length > 0) {
-            throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
-          }
-
-          points = lines.slice(1).map((line, lineIndex) => {
-            const values = line.split(',').map(v => v.trim())
-            if (values.length !== headers.length) {
-              throw new Error(`Invalid number of columns in row ${lineIndex + 2}`)
-            }
-
-            const point: Record<string, any> = {
-              version: { id: parseInt(selectedVersion) },
-              version_id: parseInt(selectedVersion)
-            }
-
-            headers.forEach((header, index) => {
-              if (values[index]) {
-                if (header === 'scale') {
-                  const cleanValue = values[index].replace(/['"]/g, '').trim()
-                  if (cleanValue === '') {
-                    point[header] = undefined;
-                  } else {
-                    const scale = parseFloat(cleanValue)
-                    if (isNaN(scale)) {
-                      throw new Error(`Invalid scale value '${values[index]}' in row ${lineIndex + 2}`)
-                    }
-                    point[header] = scale
-                  }
-                } else {
-                  point[header] = values[index].trim()
-                }
-              }
-            })
-
-            // Validate required fields
-            requiredColumns.forEach(field => {
-              if (!point[field]) {
-                throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
-              }
-            })
-
-            return point
-          })
-        } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
-          // Handle Excel file
-          const data = e.target?.result as ArrayBuffer
-          const workbook = XLSX.read(data, { type: 'array' })
-          const firstSheet = workbook.Sheets[workbook.SheetNames[0]]
-          const rows = XLSX.utils.sheet_to_json(firstSheet, { header: 1 }) as any[]
-
-          if (rows.length === 0) {
-            throw new Error('Excel file is empty')
-          }
-
-          const headers = rows[0].map((h: string) => h.toLowerCase().trim())
-          
-          // Validate required columns
-          const requiredColumns = ['point_name', 'object_name', 'register', 'data_type']
-          const missingColumns = requiredColumns.filter(col => !headers.includes(col))
-          
-          if (missingColumns.length > 0) {
-            throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
-          }
-
-          points = rows.slice(1).map((row: any[], lineIndex: number) => {
-            const point: Record<string, any> = {
-              version: { id: parseInt(selectedVersion) },
-              version_id: parseInt(selectedVersion)
-            }
-
-            headers.forEach((header: string, index: number) => {
-              if (row[index] !== undefined && row[index] !== null) {
-                if (header === 'scale') {
-                  if (row[index] === '' || row[index] === null || row[index] === undefined) {
-                    point[header] = undefined;
-                  } else {
-                    const scale = parseFloat(row[index]);
-                    if (isNaN(scale)) {
-                      throw new Error(`Invalid scale value '${row[index]}' in row ${lineIndex + 2}`);
-                    }
-                    point[header] = scale;
-                  }
-                } else {
-                  point[header] = String(row[index]).trim();
-                }
-              }
-            })
-
-            // Validate required fields
-            requiredColumns.forEach(field => {
-              if (!point[field]) {
-                throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
-              }
-            })
-
-            return point
-          })
-        } else {
-          throw new Error('Unsupported file type. Please upload a CSV or Excel file.')
+      if (file.name.endsWith('.csv')) {
+        // Handle CSV file - no changes needed for CSV handling
+        const text = await file.text()
+        const lines = text.split('\n').filter(line => line.trim())
+        const headers = lines[0].split(',').map(h => h.trim().toLowerCase())
+        
+        // Validate required columns
+        const missingColumns = requiredColumns.filter(col => !headers.includes(col))
+        if (missingColumns.length > 0) {
+          throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
         }
 
-        if (points.length === 0) {
-          throw new Error('No valid points found in file')
+        points = lines.slice(1).map((line, lineIndex) => {
+          const values = line.split(',').map(v => v.trim())
+          if (values.length !== headers.length) {
+            throw new Error(`Invalid number of columns in row ${lineIndex + 2}`)
+          }
+
+          const point: Record<string, any> = {
+            version: { id: parseInt(selectedVersion) },
+            version_id: parseInt(selectedVersion)
+          }
+
+          headers.forEach((header, index) => {
+            if (values[index]) {
+              if (header === 'scale') {
+                const cleanValue = values[index].replace(/['"]/g, '').trim()
+                if (cleanValue === '') {
+                  point[header] = undefined
+                } else {
+                  const scale = parseFloat(cleanValue)
+                  if (isNaN(scale)) {
+                    throw new Error(`Invalid scale value '${values[index]}' in row ${lineIndex + 2}`)
+                  }
+                  point[header] = scale
+                }
+              } else {
+                point[header] = values[index].trim()
+              }
+            }
+          })
+
+          // Validate required fields
+          requiredColumns.forEach(field => {
+            if (!point[field]) {
+              throw new Error(`Missing ${field} in row ${lineIndex + 2}`)
+            }
+          })
+
+          return point
+        })
+      } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+        const buffer = await file.arrayBuffer()
+        const workbook = new ExcelJS.Workbook()
+        await workbook.xlsx.load(buffer)
+        
+        const worksheet = workbook.worksheets[0]
+        if (!worksheet) {
+          throw new Error('Excel file is empty')
         }
 
-        // Set confirmation state
-        setConfirmImport({ file, points })
+        const headers = worksheet.getRow(1).values as string[]
+        if (!headers) {
+          throw new Error('No headers found in Excel file')
+        }
 
-      } catch (error: any) {
-        setError(error.message || 'Error importing points')
+        // Convert headers to lowercase and trim
+        const normalizedHeaders = headers.map(h => h?.toString().toLowerCase().trim())
+
+        // Validate required columns
+        const missingColumns = requiredColumns.filter(col => !normalizedHeaders.includes(col))
+        if (missingColumns.length > 0) {
+          throw new Error(`Missing required columns: ${missingColumns.join(', ')}`)
+        }
+
+        // Process each row
+        worksheet.eachRow((row, rowNumber) => {
+          if (rowNumber === 1) return // Skip header row
+
+          const point: Record<string, any> = {
+            version: { id: parseInt(selectedVersion) },
+            version_id: parseInt(selectedVersion)
+          }
+
+          row.eachCell((cell, colNumber) => {
+            const header = normalizedHeaders[colNumber]
+            if (!header) return
+
+            if (header === 'scale') {
+              const value = cell.value
+              if (value === null || value === '') {
+                point[header] = undefined
+              } else {
+                const scale = parseFloat((value ?? '').toString())
+                if (isNaN(scale)) {
+                  throw new Error(`Invalid scale value '${value}' in row ${rowNumber}`)
+                }
+                point[header] = scale
+              }
+            } else {
+              point[header] = cell.value?.toString().trim()
+            }
+          })
+
+          // Validate required fields
+          requiredColumns.forEach(field => {
+            if (!point[field]) {
+              throw new Error(`Missing ${field} in row ${rowNumber}`)
+            }
+          })
+
+          points.push(point)
+        })
+      } else {
+        throw new Error('Unsupported file type. Please upload a CSV or Excel file.')
       }
+
+      if (points.length === 0) {
+        throw new Error('No valid points found in file')
+      }
+
+      // Set confirmation state
+      setConfirmImport({ file, points })
+
+    } catch (error: any) {
+      setError(error.message || 'Error importing points')
     }
 
-    reader.onerror = () => {
-      setError('Error reading file')
-    }
-
-    if (file.name.endsWith('.csv')) {
-      reader.readAsText(file)
-    } else {
-      reader.readAsArrayBuffer(file)
-    }
-    
     // Clear the file input for future uploads
     event.target.value = ''
   }

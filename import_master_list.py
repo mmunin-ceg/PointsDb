@@ -26,9 +26,9 @@ EXPECTED_COLUMNS = [
 
 # === Helper: Normalize Excel column names ===
 def normalize(header):
-    if header is None:
+    if not header:
         return ""
-    return header.strip().lower().replace('\n', ' ').replace('"', '').strip()
+    return str(header).lower().strip()
 
 # === PostgreSQL connection ===
 conn = psycopg2.connect(**PG_CONN_INFO)
@@ -65,12 +65,12 @@ for sheet in wb.worksheets:
     print(f"  Table range: {min_row}-{max_row}, {min_col}-{max_col}")
     headers = [sheet.cell(row=min_row, column=c).value for c in range(min_col, max_col + 1)]
     headers_norm = [normalize(h) if h else "" for h in headers]
-    col_map = {h: i+1 for i, h in enumerate(headers_norm)}
+    col_map = {normalize(h): i+1 for i, h in enumerate(headers)}
+
     provider = input("Enter the provider name: ").strip()
     protocol = input("Enter the protocol name: ").strip()
     interface_name = sheet.title.strip()
     version = DEFAULT_VERSION
-
 
     # If provider does not exist, insert it
     cur.execute("""
@@ -81,53 +81,56 @@ for sheet in wb.worksheets:
     """, (provider,))
     if cur.rowcount == 0:
         cur.execute("SELECT id FROM api_provider WHERE name = %s", (provider,))
-        provider_id = cur.fetchone()[0]
-    else:
-        provider_id = cur.fetchone()[0]
-    print(f"  Provider ID: {provider_id}")
-    # Insert interface
-    cur.execute("""
-        INSERT INTO data_interface (name, protocol, provider_id, is_internal)
-        VALUES (%s, %s, %s, true)
-        ON CONFLICT (name) DO UPDATE SET protocol = EXCLUDED.protocol
-        RETURNING id
-    """, (interface_name, protocol or DEFAULT_PROTOCOL, provider_id))
+    provider_id = cur.fetchone()[0]
     conn.commit()
-    interface_id = cur.fetchone()
-    if not interface_id:
-        cur.execute("SELECT id FROM data_interface WHERE name = %s", (interface_name,))
-        interface_id = cur.fetchone()
-    interface_id = interface_id[0]
 
-    # Insert map_version
+    # If interface does not exist, insert it
     cur.execute("""
-        INSERT INTO map_version (interface_id, version)
-        VALUES (%s, %s)
-        ON CONFLICT (interface_id, version) DO NOTHING
+        INSERT INTO data_interface (name, protocol, provider_id)
+        VALUES (%s, %s, %s)
+        ON CONFLICT (name, protocol, provider_id) DO NOTHING
         RETURNING id
-    """, (interface_id, version))
+    """, (interface_name, protocol, provider_id))
     if cur.rowcount == 0:
         cur.execute("""
-            SELECT id FROM map_version
-            WHERE interface_id = %s AND version = %s
-        """, (interface_id, version))
-    version_id = cur.fetchone()[0]
+            SELECT id FROM data_interface 
+            WHERE name = %s AND protocol = %s AND provider_id = %s
+        """, (interface_name, protocol, provider_id))
+    interface_id = cur.fetchone()[0]
+    conn.commit()
 
-    # Collect row data
-    rows = []
-    
+    # Get or create map version
+    cur.execute("""
+        INSERT INTO map_version (version, interface_id)
+        VALUES (%s, %s)
+        ON CONFLICT (version, interface_id) DO NOTHING
+        RETURNING id
+    """, (version, interface_id))
+    if cur.rowcount == 0:
+        cur.execute("""
+            SELECT id FROM map_version 
+            WHERE version = %s AND interface_id = %s
+        """, (version, interface_id))
+    version_id = cur.fetchone()[0]
+    conn.commit()
+
+    # Process each row in the table
     for r in range(min_row + 1, max_row + 1):
-        point_name = sheet.cell(row=r, column=col_map['point description']).value 
-        if "modbus table" in col_map:
-            object_name = sheet.cell(row=r, column=col_map['modbus table']).value
-        elif "object" in col_map:
-            object_name = sheet.cell(row=r, column=col_map['object']).value 
-        if "modbus register" in col_map:
-            register = sheet.cell(row=r, column=col_map['modbus register']).value 
+        if sheet.cell(row=r, column=1).value is None:
+            continue
+            
+        point_name = sheet.cell(row=r, column=col_map['rtac point name']).value
+        object_name = sheet.cell(row=r, column=col_map['object']).value
+        
+        if not point_name:
+            print(f"  Skipping row {r}: No point name")
+            continue
+            
+        # Check if "register" or "dnp index" exists and use accordingly
+        if "register" in col_map:
+            register = sheet.cell(row=r, column=col_map['register']).value
         elif "dnp index" in col_map:
             register = sheet.cell(row=r, column=col_map['dnp index']).value
-        elif "modbusregister" in col_map:
-            register = sheet.cell(row=r, column=col_map['modbusregister']).value
         else:
             register = None        
         data_type = sheet.cell(row=r, column=col_map['data type']).value
@@ -143,39 +146,39 @@ for sheet in wb.worksheets:
         off_state = sheet.cell(row=r, column=col_map['off (0) state']).value
         alarm_limits = sheet.cell(row=r, column=col_map['analog alarm limits']).value
         alarm_profile = sheet.cell(row=r, column=col_map['alarm profile']).value
-        enumeration_table = sheet.cell(row=r, column=col_map['enumeration table']).comment
-        if enumeration_table is None:
-            enumeration_table = sheet.cell(row=r, column=col_map['enumeration table']).value
-        else:
-            enumeration_table = enumeration_table.text
+        enumeration_table = sheet.cell(row=r, column=col_map['enumeration table']).value
         comments = sheet.cell(row=r, column=col_map['comments']).value
 
-
- 
-
-        if not point_name or not data_type:
-            continue  # skip empty/incomplete rows
-
-        sql = """
-            INSERT into map_point (
-                point_name, object_name, data_type, register, bit_offset, units,
-                scale, alarm_state, on_state, off_state, alarm_limits,
-                alarm_profile, enumeration_table, comments,
-                version_id
-            ) VALUES (
-                %s, %s, %s, %s, %s, %s,
-                %s, %s, %s, %s, %s,
-                %s, %s, %s, %s
-            )"""
-        cur.execute(sql, (
-            point_name, object_name, data_type, register, bit_offset, units,
-            scale, alarm_state, on_state, off_state, alarm_limits,
-            alarm_profile, enumeration_table, comments, 
-            version_id
+        # Insert point
+        cur.execute("""
+            INSERT INTO map_point (
+                version_id, point_name, object_name, register, data_type,
+                bit_offset, units, scale, alarm_state, on_state,
+                off_state, alarm_limits, alarm_profile, enumeration_table, comments
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (point_name, version_id) DO UPDATE SET
+                object_name = EXCLUDED.object_name,
+                register = EXCLUDED.register,
+                data_type = EXCLUDED.data_type,
+                bit_offset = EXCLUDED.bit_offset,
+                units = EXCLUDED.units,
+                scale = EXCLUDED.scale,
+                alarm_state = EXCLUDED.alarm_state,
+                on_state = EXCLUDED.on_state,
+                off_state = EXCLUDED.off_state,
+                alarm_limits = EXCLUDED.alarm_limits,
+                alarm_profile = EXCLUDED.alarm_profile,
+                enumeration_table = EXCLUDED.enumeration_table,
+                comments = EXCLUDED.comments
+        """, (
+            version_id, point_name, object_name, register, data_type,
+            bit_offset, units, scale, alarm_state, on_state,
+            off_state, alarm_limits, alarm_profile, enumeration_table, comments
         ))
-    conn.commit()
-    print(f"  Imported {len(rows)} rows from table: {table.name}")
 
-cur.close()
+    conn.commit()
+    print(f"  Processed sheet: {sheet.title}")
+
 conn.close()
-print("✅ Import complete.")
+print("Done!")

@@ -1,6 +1,6 @@
 import express, { Router } from "express"
 import { validate } from "class-validator"
-import * as XLSX from 'xlsx'
+import ExcelJS from 'exceljs'
 import { AppDataSource } from "../data-source"
 import { MapPoint } from "../entity/MapPoint"
 
@@ -168,7 +168,7 @@ router.delete("/version/:versionId", async (req, res) => {
     }
 })
 
-// Export points as CSV
+// Export points as Excel
 router.get("/version/:versionId/export", async (req, res) => {
     try {
         const points = await repository.find({
@@ -177,7 +177,10 @@ router.get("/version/:versionId/export", async (req, res) => {
         })
 
         // Create workbook and worksheet
-        const wb = XLSX.utils.book_new()
+        const wb = new ExcelJS.Workbook()
+        const ws = wb.addWorksheet('Points')
+
+        // Add headers
         const headers = [
             'point_name',
             'object_name',
@@ -194,35 +197,34 @@ router.get("/version/:versionId/export", async (req, res) => {
             'enumeration_table',
             'comments'
         ]
+        ws.addRow(headers)
 
-        // Convert points to array format for Excel
-        const rows = points.map(point => [
-            point.point_name,
-            point.object_name,
-            point.register,
-            point.data_type,
-            point.bit_offset || '',
-            point.units || '',
-            point.scale || '',
-            point.alarm_state || '',
-            point.on_state || '',
-            point.off_state || '',
-            point.alarm_limits || '',
-            point.alarm_profile || '',
-            point.enumeration_table || '',
-            point.comments || ''
-        ])
+        // Add data rows
+        points.forEach(point => {
+            ws.addRow([
+                point.point_name,
+                point.object_name,
+                point.register,
+                point.data_type,
+                point.bit_offset || '',
+                point.units || '',
+                point.scale || '',
+                point.alarm_state || '',
+                point.on_state || '',
+                point.off_state || '',
+                point.alarm_limits || '',
+                point.alarm_profile || '',
+                point.enumeration_table || '',
+                point.comments || ''
+            ])
+        })
 
-        const wsData = [headers, ...rows]
-        const ws = XLSX.utils.aoa_to_sheet(wsData)
-        XLSX.utils.book_append_sheet(wb, ws, "Points")
-        
         // Generate Excel file
-        const excelBuffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' })
+        const buffer = await wb.xlsx.writeBuffer()
         
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         res.setHeader('Content-Disposition', `attachment; filename="map_points_${req.params.versionId}.xlsx"`)
-        res.send(excelBuffer)
+        res.send(buffer)
     } catch (error) {
         res.status(500).json({ message: "Error exporting points" })
     }
